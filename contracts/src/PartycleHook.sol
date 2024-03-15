@@ -12,7 +12,7 @@ import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
 contract PartycleHook is BaseHook {
     using PoolIdLibrary for PoolKey;
 
-    //IPartycle partycle;
+    IPartycle partycle;
 
     // NOTE: ---------------------------------------------------------
     // state variables should typically be unique to a pool
@@ -54,7 +54,7 @@ contract PartycleHook is BaseHook {
             ? uint256(swapParams.amountSpecified)
             : uint256(-swapParams.amountSpecified);
         address swapper = abi.decode(data, (address));
-        //partycle.mint(amount, swapper);
+        //partycle.mint();
 
         return BaseHook.afterSwap.selector;
     }
