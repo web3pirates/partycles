@@ -18,6 +18,7 @@ export default function Home() {
 
       <Layout>
         <>
+          <Nav />
           <div className="flex flex-col gap-1 text-left p-1">
             <h1>Your cool app is here</h1>
             <p>

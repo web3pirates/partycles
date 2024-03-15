@@ -1,4 +1,4 @@
-import styles from "../styles/styles.module.css";
+import { connectButtonStyle } from "@/style";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import styled from "styled-components";
@@ -36,7 +36,9 @@ export function Nav() {
     <Wrapper>
       <Menu>
         <Title>
-          <Link href="/">Your cool App</Link>
+          <Link href="/" className="text-red-300">
+            Your cool App
+          </Link>
         </Title>
         <Title>
           <Link href="/testAtoms">Atoms styles</Link>
@@ -44,10 +46,7 @@ export function Nav() {
       </Menu>
       <div style={{ display: "flex", gap: "10px" }}>
         {address && (
-          <button
-            className={styles.connectButton}
-            style={{ display: "flex", gap: "10px", alignItems: "center" }}
-          >
+          <button className={`${connectButtonStyle} flex gap-2 items-center`}>
             <img
               src="/images/github.png"
               alt={`Github image`}
@@ -67,8 +66,6 @@ export function Nav() {
             authenticationStatus,
             mounted,
           }) => {
-            // Note: If your app doesn't use authentication, you
-            // can remove all 'authenticationStatus' checks
             const ready = mounted && authenticationStatus !== "loading";
             const connected =
               ready &&
@@ -94,7 +91,7 @@ export function Nav() {
                       <button
                         onClick={openConnectModal}
                         type="button"
-                        className={styles.connectButton}
+                        className={`${connectButtonStyle} `}
                       >
                         Connect Wallet
                       </button>
@@ -105,7 +102,7 @@ export function Nav() {
                       <button
                         onClick={openChainModal}
                         type="button"
-                        className={styles.connectButton}
+                        className={`${connectButtonStyle} `}
                       >
                         Wrong network
                       </button>
@@ -115,9 +112,8 @@ export function Nav() {
                     <div style={{ display: "flex", gap: 12 }}>
                       <button
                         onClick={openChainModal}
-                        style={{ display: "flex", alignItems: "center" }}
                         type="button"
-                        className={styles.connectButton}
+                        className={`${connectButtonStyle} flex items-center`}
                       >
                         {chain.hasIcon && (
                           <div
@@ -144,7 +140,7 @@ export function Nav() {
                       <button
                         onClick={openAccountModal}
                         type="button"
-                        className={styles.connectButton}
+                        className={`${connectButtonStyle} `}
                       >
                         {account.displayName}
                         {account.displayBalance

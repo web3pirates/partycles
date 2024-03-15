@@ -16,7 +16,7 @@ const { publicClient, webSocketPublicClient } = configureChains(chains, [
 ]);
 
 const { connectors } = getDefaultWallets({
-  appName: "Web3 Starter",
+  appName: "partycles",
   projectId: WALLETCONNECT_ID,
   chains,
 });

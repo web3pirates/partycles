@@ -1,5 +1,4 @@
 import { chains, wagmiConfig } from "@/provider";
-import "@/styles/style.scss";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import PlausibleProvider from "next-plausible";
