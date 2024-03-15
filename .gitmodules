@@ -7,3 +7,6 @@
 [submodule "contracts/lib/v4-core"]
 	path = contracts/lib/v4-core
 	url = https://github.com/uniswap/v4-core
+[submodule "contracts/lib/erc404"]
+	path = contracts/lib/erc404
+	url = https://github.com/Pandora-Labs-Org/erc404
