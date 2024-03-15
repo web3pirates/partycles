@@ -10,6 +10,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta property="twitter:creator" content="@example" />
           <meta property="twitter:card" content="summary_large_image" />
+          <link href="./output.css" rel="stylesheet"></link>
         </Head>
         <body>
           <Main />
