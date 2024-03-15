@@ -8,6 +8,7 @@ import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
+import {IPartycle} from "./interfaces/IPartycle.sol";
 
 contract PartycleHook is BaseHook {
     using PoolIdLibrary for PoolKey;
@@ -54,7 +55,7 @@ contract PartycleHook is BaseHook {
             ? uint256(swapParams.amountSpecified)
             : uint256(-swapParams.amountSpecified);
         address swapper = abi.decode(data, (address));
-        //partycle.mint();
+        partycle.mintERC20(swapper, amount);
 
         return BaseHook.afterSwap.selector;
     }
@@ -70,7 +71,7 @@ contract PartycleHook is BaseHook {
             ? uint256(liquidityParams.liquidityDelta)
             : uint256(-liquidityParams.liquidityDelta);
         address swapper = abi.decode(data, (address));
-        //partycle.mint(amount, swapper);
+        partycle.mintERC20(swapper, amount);
 
         return BaseHook.beforeAddLiquidity.selector;
     }

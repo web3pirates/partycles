@@ -2,7 +2,6 @@
 pragma solidity ^0.8.24;
 
 import {ERC404} from "lib/erc404/contracts/ERC404.sol";
-
 import {INounsDescriptorMinimal} from "lib/nouns-monorepo/packages/nouns-contracts/contracts/interfaces/INounsDescriptorMinimal.sol";
 import {INounsSeeder} from "lib/nouns-monorepo/packages/nouns-contracts/contracts/interfaces/INounsSeeder.sol";
 import {Ownable} from "lib/v4-periphery/lib/v4-core/lib/openzeppelin-contracts/contracts/access/Ownable.sol";
@@ -13,15 +12,35 @@ abstract contract Partycle is ERC404, Ownable {
     INounsDescriptorMinimal descriptor;
     INounsSeeder seeder;
 
+    address minter;
+
     // The noun seeds
     mapping(uint256 => INounsSeeder.Seed) public seeds;
 
+    modifier onlyMinter() {
+        require(msg.sender == minter, "Only minter can mint new tokens");
+        _;
+    }
+
     constructor(
+        string memory _name,
+        string memory _symbol,
+        uint8 _decimals,
         INounsDescriptorMinimal _descriptor,
-        INounsSeeder _seeder
-    ) ERC404("Partycle", "PARTY", 18) {
+        INounsSeeder _seeder,
+        address _minter
+    ) ERC404(_name, _symbol, _decimals) {
         descriptor = _descriptor;
         seeder = _seeder;
+        minter = _minter;
+    }
+
+    function mintERC20(address to, uint256 value) external onlyMinter {
+        _mintERC20(to, value);
+    }
+
+    function setMinter(address _minter) external onlyOwner {
+        minter = _minter;
     }
 
     /**
@@ -63,10 +82,7 @@ abstract contract Partycle is ERC404, Ownable {
             id = _storedERC721Ids.popBack();
         } else {
             // Otherwise, mint a new token, should not be able to go over the total fractional supply.
-            INounsSeeder.Seed memory seed = seeds[id] = seeder.generateSeed(
-                id,
-                descriptor
-            );
+            seeds[id] = seeder.generateSeed(id, descriptor);
             ++minted;
 
             // Reserve max uint256 for approvals
