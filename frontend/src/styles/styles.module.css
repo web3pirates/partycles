@@ -1,0 +1,110 @@
+.container {
+  padding: 0 2rem;
+  background-color: white;
+  color: white;
+  min-height: 100vh;
+}
+
+.main {
+  min-height: 90vh;
+  padding: 2rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.navbar {
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+}
+.connectNavbar {
+  margin-left: auto;
+  width: fit-content;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.connectButton {
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.fieldInfo {
+  color: white;
+}
+.title a {
+  text-decoration: none;
+}
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 1rem 0;
+  line-height: 1;
+  font-size: 2.5rem;
+  color: white;
+  text-align: left;
+}
+
+.description {
+  text-align: center;
+}
+.link {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.mainComponent {
+  inset: 0;
+  position: absolute;
+  text-align: center;
+  display: grid;
+  place-content: center;
+  background-color: white;
+  background-image: url('/wallpaper.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hiddenDiv {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.inputId {
+  margin-left: 1rem;
+  width: 17rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  text-align: center;
+  border: 2px solid black;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}

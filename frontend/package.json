@@ -1,7 +1,7 @@
 {
-  "name": "partycles",
+  "name": "web3-starter",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,9 +13,7 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^1.0.4",
-    "@tailwindcss/line-clamp": "^0.4.4",
     "@types/uuid": "^9.0.7",
-    "autoprefixer": "^10.4.18",
     "next": "13.4.1",
     "next-plausible": "^3.7.2",
     "openai": "^4.24.7",
@@ -25,7 +23,6 @@
     "react-is": "^18.2.0",
     "react-tracked": "^1.7.11",
     "styled-components": "^5.3.10",
-    "tailwindcss": "^3.4.1",
     "use-async-memo": "^1.2.5",
     "uuid": "^9.0.1",
     "viem": "^1.5.3",

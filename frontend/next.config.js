@@ -1,4 +1,4 @@
-const { withPlausibleProxy } = require("next-plausible");
+const { withPlausibleProxy } = require('next-plausible')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,6 +7,6 @@ const nextConfig = {
     // Enables the styled-components SWC transform
     styledComponents: true,
   },
-};
+}
 
-module.exports = withPlausibleProxy()(nextConfig);
+module.exports = withPlausibleProxy()(nextConfig)
