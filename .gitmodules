@@ -1,0 +1,3 @@
+[submodule "contracts"]
+	path = contracts
+	url = https://github.com/uniswapfoundation/v4-template.git
