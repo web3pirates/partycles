@@ -15,11 +15,6 @@ contract PartycleHook is BaseHook {
 
     IPartycle partycle;
 
-    // NOTE: ---------------------------------------------------------
-    // state variables should typically be unique to a pool
-    // a single hook contract should be able to service multiple pools
-    // ---------------------------------------------------------------
-
     constructor(IPoolManager _poolManager) BaseHook(_poolManager) {}
 
     function getHookPermissions()

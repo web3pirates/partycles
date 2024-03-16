@@ -1,0 +1,10 @@
+type User @entity {
+  id: Bytes!
+  gained: BigInt!
+  nftd: [NFT!]! @derivedFrom(field: "owner")
+}
+
+type NFT @entity {
+  id: ID!
+  owner: User!
+}

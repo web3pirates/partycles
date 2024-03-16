@@ -1,0 +1,26 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Partycle
+    network: arbitrum-one
+    source:
+      address: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+      abi: Partycle
+      startBlock: 34266938
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+      abis:
+        - name: Partycle
+          file: ./abis/Partycle.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleERC721Transfer
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleERC20Transfer
+      file: ./src/partycle.ts
