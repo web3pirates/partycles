@@ -1,7 +1,9 @@
+import nounceIcon from "../../public/images/nouseicon.jpeg";
 import styles from "../styles/styles.module.css";
 import { wagmiConfig } from "@/providers";
 import { useSharedState } from "@/utils/store";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
@@ -34,9 +36,6 @@ export const Menu = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 2rem;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
   /* border-bottom: 1px solid #dee2e6; */
   width: 100%;
 `;
@@ -49,6 +48,7 @@ export function Nav() {
   return (
     <Wrapper>
       <Menu>
+        <Image src={nounceIcon} alt="Partycles" width={50} height={50} />
         {/* <Title>
           <Link href="/">Partycles</Link>
         </Title>
@@ -56,6 +56,7 @@ export function Nav() {
           <Link href="/testAtoms">Atoms styles</Link>
         </Title> */}
       </Menu>
+
       <div style={{ display: "flex", gap: "10px" }}>
         <button
           type="button"
