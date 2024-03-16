@@ -1,7 +1,7 @@
-import type { AppPropsType, AppType } from "next/dist/shared/lib/utils";
-import Document, { Head, Html, Main, NextScript } from "next/document";
-import type { DocumentContext } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import type { AppPropsType, AppType } from 'next/dist/shared/lib/utils';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
+import type { DocumentContext } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
   render() {
@@ -10,6 +10,13 @@ export default class MyDocument extends Document {
         <Head>
           <meta property="twitter:creator" content="@example" />
           <meta property="twitter:card" content="summary_large_image" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                globalThis.Browser = { T: () => {} };
+              `,
+            }}
+          />
         </Head>
         <body>
           <Main />

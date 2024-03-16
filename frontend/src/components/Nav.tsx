@@ -5,14 +5,14 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 95%;
+  width: 100%;
+  padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
   position: fixed;
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: 0px;
+  margin-left: 0px;
 `;
 
 const Title = styled.span`
@@ -27,7 +27,8 @@ export const Menu = styled.div`
   gap: 2rem;
   padding: 1rem 0;
   margin-bottom: 2rem;
-  border-bottom: 1px solid #dee2e6;
+  /* border-bottom: 1px solid #dee2e6; */
+  width: 100%;
 `;
 
 export function Nav() {
@@ -36,12 +37,12 @@ export function Nav() {
   return (
     <Wrapper>
       <Menu>
-        <Title>
+        {/* <Title>
           <Link href="/">Partycles</Link>
         </Title>
         <Title>
           <Link href="/testAtoms">Atoms styles</Link>
-        </Title>
+        </Title> */}
       </Menu>
       <div style={{ display: 'flex', gap: '10px' }}>
         {user && (
