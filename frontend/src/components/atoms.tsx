@@ -1,5 +1,5 @@
-import { mq } from '@/styles/breakpoints';
-import styled, { keyframes } from 'styled-components';
+import { mq } from "@/styles/breakpoints";
+import styled, { keyframes } from "styled-components";
 
 export const Layout = styled.div`
   // Vertically centered layout
@@ -55,7 +55,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 80rem;
   margin-left: auto;
-  margin-top: 10rem;
+  margin-top: 2rem;
   margin-right: auto;
 `;
 
@@ -226,9 +226,10 @@ export const GPTDescription = styled.div`
   border-radius: 8px; /* Rounded corners */
   padding: 1rem; /* Spacing inside the box */
   margin-top: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
   color: #1f2937; /* Dark grey text for readability */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clean, readable font */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* A clean, readable font */
   text-align: left; /* Align text to the left */
   font-size: 1rem; /* Standard font size */
   line-height: 1.5; /* Spacing between lines */
