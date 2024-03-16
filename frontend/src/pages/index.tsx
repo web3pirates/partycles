@@ -69,7 +69,9 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
           width={40}
           height={40}
         />
-        &nbsp;{"->"}&nbsp;
+        &nbsp;
+        <ArrowDown className="w-6 h-6 -rotate-90" />
+        &nbsp;
         {10 * pool.ratio} &nbsp;{pool.token2.symbol}&nbsp;
         <Image
           src={pool.token2.img}

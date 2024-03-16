@@ -16,7 +16,6 @@ import { useAccount } from "wagmi";
 
 export default function partycles() {
   const isMounted = useIsMounted(); // Prevent Next.js hydration errors
-  const router = useRouter();
   const { address } = useAccount();
   const { fetchUserPartycles } = useGraph();
 
@@ -36,15 +35,7 @@ export default function partycles() {
         <CustomContainer as="main">
           <HackathonsContainer>
             {partycles?.map((party, idx) => (
-              <HackathonBox
-                title="Partycles"
-                onClick={() =>
-                  router.push(`/partycles/${idx}?tokenId=${party}`)
-                }
-              >
-                <img src={partyclesImages[idx]} />
-                <Title>PARTY #{party}</Title>
-              </HackathonBox>
+              <NFT party={party} idx={idx} />
             ))}
           </HackathonsContainer>
         </CustomContainer>
@@ -54,17 +45,26 @@ export default function partycles() {
   );
 }
 
-export const partyclesImages = [
-  "https://ca.slack-edge.com/T02742R3GCA-U03K7DS332B-93303d454d34-512",
-  "https://ca.slack-edge.com/T02742R3GCA-U06HUN592C8-e53fb61db2af-512",
-  "https://ca.slack-edge.com/T02742R3GCA-U06EGJDNQAX-a4471283cd40-512",
-  "https://ca.slack-edge.com/T02742R3GCA-U027GNCE317-9edefd667b4b-512",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun1.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun2.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun3.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun4.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun1.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun5.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun6.svg",
-  "https://tideprotocol-images.s3.eu-west-1.amazonaws.com/noun7.svg",
-];
+function NFT(props: {
+  party: { id: string; tokenURI: string; partyNumber: string };
+  idx: number;
+}) {
+  const { idx, party } = props;
+  const router = useRouter();
+
+  const imageURL: string = useAsyncMemo(async () => {
+    const json = await fetch(party.tokenURI);
+    const parsedJSON = await json.json();
+    return parsedJSON.image;
+  }, [party.tokenURI]);
+
+  return (
+    <HackathonBox
+      title="Partycles"
+      onClick={() => router.push(`/partycles/${party.id}`)}
+    >
+      <img src={imageURL} />
+      <Title>PARTY #{party.partyNumber}</Title>
+    </HackathonBox>
+  );
+}

@@ -9,11 +9,11 @@ import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
 import {IPartycle} from "./interfaces/IPartycle.sol";
-import {IPartycleHook} from "./interfaces/IPartycleHook.sol";
+import {IPartyclesHook} from "./interfaces/IPartyclesHook.sol";
 import {IERC20} from "../lib/v4-core/lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol";
 import {Currency, CurrencyLibrary} from "../lib/v4-core/src/types/Currency.sol";
 
-contract PartycleHook is BaseHook, IPartycleHook {
+contract PartyclesHook is BaseHook, IPartyclesHook {
     using PoolIdLibrary for PoolKey;
     using CurrencyLibrary for Currency;
 

@@ -17,7 +17,7 @@ export const partycleAbi = [
         type: "uint8",
       },
       {
-        internalType: "contract IPartycleHook",
+        internalType: "contract IPartyclesHook",
         name: "_hook",
         type: "address",
       },

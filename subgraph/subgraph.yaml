@@ -6,9 +6,9 @@ dataSources:
     name: Partycle
     network: arbitrum-sepolia
     source:
-      address: "0x45619dD8F3AEb12dD46Ee2Efd0aC43bF4c7824Fa"
+      address: "0x3a79926b672C735832d714e6C5322c2F36e77aED"
       abi: Partycle
-      startBlock: 23813880
+      startBlock: 23885381
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
