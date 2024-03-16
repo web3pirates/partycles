@@ -68,24 +68,27 @@ export default function PartycleView() {
                 onClick={() => {
                   if (address) scratch(tokenId);
                 }}
-                className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-6 py-2.5 text-center me-2 mb-2"
+                className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
               >
                 Scratch
               </button>
               <button
                 type="button"
-                className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-6 py-2.5 text-center me-2 mb-2"
+                className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
               >
                 Sell
               </button>
-              <form onSubmit={createPaymentIntent}>
-                <button
-                  type="submit"
-                  className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
-                >
-                  Buy for 1 USDC
-                </button>
-              </form>
+
+              {/* <button
+                onClick={(e: any) => {
+                  createPaymentIntent(e);
+                }}
+                type="submit"
+                className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+              >
+                Sell for 100 USDC
+              </button> */}
+
               {intent && depositAddress && !paymentStatus && (
                 <>
                   <div>Pay 1 USDC to {depositAddress}</div>
