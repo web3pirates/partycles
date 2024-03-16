@@ -57,25 +57,26 @@ export default function Home() {
 const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
   const { pool, callback } = props;
   return (
-    <div
-      className="rounded-xl w-full font-semibold py-2 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 hover:cursor-pointer"
-      onClick={() => callback(pool)}
-    >
-      <div className="w-fit mx-auto flex text-xl ">
-        {pool.token1.symbol}&nbsp;
+    <div className="font-semibold" onClick={() => callback(pool)}>
+      <div className="w-fit mx-auto flex text-xl whitespace-nowrap">
+        10 {pool.token1.symbol}&nbsp;
         <Image
           src={pool.token1.img}
           alt={pool.token1.symbol}
-          width={25}
-          height={15}
+          width={40}
+          height={40}
         />
-        &nbsp;-&nbsp;{pool.token2.symbol}&nbsp;
+        {10 * pool.ratio} &nbsp;-&nbsp;{pool.token2.symbol}&nbsp;
         <Image
           src={pool.token2.img}
           alt={pool.token2.symbol}
-          width={25}
-          height={15}
+          width={40}
+          height={40}
         />
+        <div className="mr-4 flex"></div>
+        <div className="rounded-xl w-full font-semibold px-4 py-2 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 hover:cursor-pointer">
+          Swap now!
+        </div>
       </div>
     </div>
   );

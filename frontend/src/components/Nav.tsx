@@ -40,6 +40,12 @@ export const Menu = styled.div`
   width: 100%;
 `;
 
+export const connectButtonStyle =
+  "inline-block px-3 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out whitespace-nowrap";
+
+export const infoButtonStyle =
+  "inline-block whitespace-nowrap text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm min-w-32 py-2.5 font-bold text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out";
+
 export function Nav() {
   const { address } = useAccount();
   const ensName = useEnsName({ address, blockTag: "latest", chainId: 1 });
@@ -76,7 +82,7 @@ export function Nav() {
       <div style={{ display: "flex", gap: "10px" }}>
         <button
           type="button"
-          className={styles.infoButton}
+          className={infoButtonStyle}
           onClick={() => {
             router.push("/");
           }}
@@ -85,7 +91,7 @@ export function Nav() {
         </button>
         <button
           type="button"
-          className={styles.infoButton}
+          className={infoButtonStyle}
           onClick={() => {
             router.push("/leaderboard");
           }}
@@ -94,7 +100,7 @@ export function Nav() {
         </button>
         <button
           type="button"
-          className={styles.infoButton}
+          className={infoButtonStyle}
           onClick={() => {
             router.push("/partycles");
           }}
@@ -138,7 +144,7 @@ export function Nav() {
                       <button
                         onClick={openConnectModal}
                         type="button"
-                        className={styles.connectButton}
+                        className={connectButtonStyle}
                       >
                         Connect Wallet
                       </button>
@@ -149,7 +155,7 @@ export function Nav() {
                       <button
                         onClick={openChainModal}
                         type="button"
-                        className={styles.connectButton}
+                        className={connectButtonStyle}
                       >
                         Wrong network
                       </button>
@@ -161,7 +167,7 @@ export function Nav() {
                         onClick={openChainModal}
                         style={{ display: "flex", alignItems: "center" }}
                         type="button"
-                        className={styles.connectButton}
+                        className={connectButtonStyle}
                       >
                         {chain.hasIcon && (
                           <div
@@ -188,7 +194,7 @@ export function Nav() {
                       <button
                         onClick={openAccountModal}
                         type="button"
-                        className={styles.connectButton}
+                        className={connectButtonStyle}
                       >
                         {ensName.data ?? account.displayName}
                       </button>
