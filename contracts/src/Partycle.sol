@@ -24,9 +24,7 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     {}
 
     function mintERC20(address to, uint256 value) external {
-        emit Test("before mint");
         _mintERC20(to, value);
-        emit Test("after mintERC20");
     }
 
     function scratch(uint256 tokenId) public {
@@ -82,13 +80,6 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
             msg.sender != getApproved[id_]
         ) {
             revert Unauthorized();
-        }
-
-        // We only need to check ERC-721 transfer exempt status for the recipient
-        // since the sender being ERC-721 transfer exempt means they have already
-        // had their ERC-721s stripped away during the rebalancing process.
-        if (erc721TransferExempt(to_)) {
-            revert RecipientIsERC721TransferExempt();
         }
 
         // Transfer 1 * units ERC-20 and 1 ERC-721 token.

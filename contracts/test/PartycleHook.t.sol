@@ -2,6 +2,7 @@
 pragma solidity ^0.8.24;
 
 import "forge-std/Test.sol";
+import "forge-std/console.sol";
 import {IHooks} from "v4-core/src/interfaces/IHooks.sol";
 import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 import {TickMath} from "v4-core/src/libraries/TickMath.sol";
@@ -112,6 +113,20 @@ contract CounterTest is Test, Deployers {
         uint256 balance = partycle.erc721BalanceOf(alice);
         partycle.mintERC20(alice, 1e18);
         assertEq(partycle.erc721BalanceOf(alice) - balance, 1);
+    }
+
+    function testScrath() public {
+        uint256[] memory minted = partycle.owned(alice);
+
+        uint256 balanceERC721 = partycle.erc721BalanceOf(alice);
+        uint256 balanceERC20 = partycle.erc20BalanceOf(alice);
+
+        vm.startPrank(alice);
+        partycle.scratch(minted[0]);
+        vm.stopPrank();
+
+        assertEq(partycle.erc721BalanceOf(alice), balanceERC721 - 1);
+        assertEq(partycle.erc20BalanceOf(alice), balanceERC20 - 1e18);
     }
 
     function testLiquidityHooks() public {
