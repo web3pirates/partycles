@@ -1,9 +1,10 @@
-import { Layout } from "@/components/Layout";
-import { Nav } from "@/components/Nav";
-import { useIsMounted } from "@/hooks/useIsMounted";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { Footer } from '@/components/Footer';
+import { Nav } from '@/components/Nav';
+import { CreateButton, CustomContainer, Layout } from '@/components/atoms';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const isMounted = useIsMounted(); // Prevent Next.js hydration errors
@@ -12,31 +13,30 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Your cool App</title>
+        <title>Partycles</title>
         <meta name="description" content="Revolutionizing cool apps." />
       </Head>
 
       <Layout>
-        <>
-          <Nav />
-          <div className="flex flex-col gap-1 text-left p-1">
-            <h1>Your cool app is here</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            </p>
+        <Nav />
 
-            <Link href="/example/create" passHref>
-              <div>Create cool app</div>
-            </Link>
-
-            <p></p>
+        <CustomContainer as="main">
+          <h1>Partycles</h1>
+          <p>
+            Welcome to Partycles, where collecting partycles gets you invited to the reward party!{' '}
             <br />
-          </div>
-        </>
+            Partycles is a platform designed to incentivize and gamify activity on UniV4 pools by
+            rewarding users with NFT scratch cards containing ERC20 rewards.
+          </p>
+
+          <Link href="/example/create" passHref>
+            <CreateButton>Create cool app</CreateButton>
+          </Link>
+
+          <p></p>
+          <br />
+        </CustomContainer>
+        <Footer />
       </Layout>
     </>
   );
