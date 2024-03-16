@@ -13,3 +13,6 @@
 [submodule "contracts/lib/nouns-monorepo"]
 	path = contracts/lib/nouns-monorepo
 	url = https://github.com/nounsDAO/nouns-monorepo
+[submodule "contracts/lib/chainlink"]
+	path = contracts/lib/chainlink
+	url = https://github.com/smartcontractkit/chainlink
