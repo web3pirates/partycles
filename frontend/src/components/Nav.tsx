@@ -41,7 +41,7 @@ export const Menu = styled.div`
 `;
 
 export const connectButtonStyle =
-  "inline-block px-3 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out whitespace-nowrap";
+  "inline-block text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm min-w-32 py-2.5 font-bold text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out whitespace-nowrap";
 
 export const infoButtonStyle =
   "inline-block whitespace-nowrap text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm min-w-32 py-2.5 font-bold text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out";
@@ -165,31 +165,33 @@ export function Nav() {
                     <div style={{ display: "flex", gap: 12 }}>
                       <button
                         onClick={openChainModal}
-                        style={{ display: "flex", alignItems: "center" }}
                         type="button"
                         className={connectButtonStyle}
                       >
-                        {chain.hasIcon && (
-                          <div
-                            style={{
-                              background: chain.iconBackground,
-                              width: 20,
-                              height: 20,
-                              borderRadius: 999,
-                              overflow: "hidden",
-                              marginRight: 4,
-                            }}
-                          >
-                            {chain.iconUrl && (
-                              <img
-                                alt={chain.name ?? "Chain icon"}
-                                src={chain.iconUrl}
-                                style={{ width: 20, height: 20 }}
-                              />
-                            )}
-                          </div>
-                        )}
-                        {chain.name}
+                        <div className="flex w-fit mx-auto">
+                          {" "}
+                          {chain.hasIcon && (
+                            <div
+                              style={{
+                                background: chain.iconBackground,
+                                width: 20,
+                                height: 20,
+                                borderRadius: 999,
+                                overflow: "hidden",
+                                marginRight: 4,
+                              }}
+                            >
+                              {chain.iconUrl && (
+                                <img
+                                  alt={chain.name ?? "Chain icon"}
+                                  src={chain.iconUrl}
+                                  style={{ width: 20, height: 20 }}
+                                />
+                              )}
+                            </div>
+                          )}
+                          {chain.name}
+                        </div>
                       </button>
                       <button
                         onClick={openAccountModal}
