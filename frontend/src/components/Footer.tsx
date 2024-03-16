@@ -1,8 +1,8 @@
-import { GithubIcon } from '@/assets/icons';
-import { mq } from '@/styles/breakpoints';
-import Image from 'next/image';
-import styled from 'styled-components';
-import { useAccount, useEnsName } from 'wagmi';
+import { GithubIcon } from "@/assets/icons";
+import { mq } from "@/styles/breakpoints";
+import Image from "next/image";
+import styled from "styled-components";
+import { useAccount, useEnsName } from "wagmi";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -45,7 +45,7 @@ const Link = styled.a`
 
 export function Footer() {
   const { address } = useAccount();
-  const ensName = useEnsName({ address, blockTag: 'latest', chainId: 1 });
+  const ensName = useEnsName({ address, blockTag: "latest", chainId: 1 });
   return (
     <Wrapper>
       <Links>
@@ -66,7 +66,7 @@ export function Footer() {
             alt=""
             width={32}
             height={32}
-          />{' '}
+          />{" "}
           <Link href="https://twitter.com/0xreekee" target="_blank">
             reekee
           </Link>
@@ -85,9 +85,12 @@ export function Footer() {
       </Links>
 
       <Links>
-        {ensName && ensName.data !== undefined && (
+        {!!ensName && !!ensName.data && (
           <Links>
-            <Link href={`https://zapper.xyz/account/${ensName.data}`} target="_blank">
+            <Link
+              href={`https://zapper.xyz/account/${ensName.data}`}
+              target="_blank"
+            >
               Zapper account @{ensName.data}
             </Link>
           </Links>

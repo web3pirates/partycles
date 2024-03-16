@@ -64,12 +64,6 @@ export function Nav() {
             }}
           />
         </button>
-        {/* <Title>
-          <Link href="/">Partycles</Link>
-        </Title>
-        <Title>
-          <Link href="/testAtoms">Atoms styles</Link>
-        </Title> */}
       </Menu>
 
       <div style={{ display: "flex", gap: "10px" }}>
