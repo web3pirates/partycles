@@ -86,7 +86,7 @@ export const Table = () => {
                     </td>
                     <td className="whitespace-nowrap p-[0.9375rem] text-custom-gray-100 relative rounded-2xl">
                       <a
-                        href={`https://zapper.xyz/account/${data.userAddress}`}
+                        href={`https://opensea.io/${data.userAddress}?search[collections][0]=partycles`}
                         className="text-bright-blue gap-x-1 max-w-[12rem] capitalize text-ellipsis overflow-hidden group underline"
                       >
                         {(getEnsName(data.userAddress) || data.userAddress)

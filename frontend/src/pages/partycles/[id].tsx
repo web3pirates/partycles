@@ -31,9 +31,10 @@ export default function PartycleView() {
               </button>
               <button
                 type="button"
+                onClick={() => router.push(`https://opensea.io/${id}/sell`)}
                 className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
               >
-                Sell 0.0017 ETH
+                Sell
               </button>
             </div>
           </div>
