@@ -93,7 +93,10 @@ export const CustomContainer = styled(Container)`
   gap: 1rem;
   align-items: left;
   text-align: left;
-  padding: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
 export const Row = styled.div`
   display: flex;
@@ -235,8 +238,8 @@ export const GPTDescription = styled.div`
 `;
 
 export const HackathonBox = styled.div`
-  background-color: #d2deff;
-  border: 1px solid #dee2e6;
+  background-color: #fff;
+  border: 1px solid #000;
   border-radius: 0.75rem;
   padding: 1rem;
   width: 300px;

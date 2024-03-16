@@ -1,16 +1,16 @@
-import nounceIcon from "../../public/images/nouseicon.jpeg";
-import styles from "../styles/styles.module.css";
-import { wagmiConfig } from "@/providers";
-import { useSharedState } from "@/utils/store";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useMemo } from "react";
-import styled from "styled-components";
-import { getEnsName } from "viem/actions";
-import { mainnet } from "viem/chains";
-import { http, useAccount, useEnsAddress, useEnsName } from "wagmi";
+import nounceIcon from '../../public/images/nouseicon.jpeg';
+import styles from '../styles/styles.module.css';
+import { wagmiConfig } from '@/providers';
+import { useSharedState } from '@/utils/store';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
+import styled from 'styled-components';
+import { getEnsName } from 'viem/actions';
+import { mainnet } from 'viem/chains';
+import { http, useAccount, useEnsAddress, useEnsName } from 'wagmi';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -42,13 +42,28 @@ export const Menu = styled.div`
 
 export function Nav() {
   const { address } = useAccount();
-  const ensName = useEnsName({ address, blockTag: "latest", chainId: 1 });
+  const ensName = useEnsName({ address, blockTag: 'latest', chainId: 1 });
   const router = useRouter();
 
   return (
     <Wrapper>
       <Menu>
-        <Image src={nounceIcon} alt="Partycles" width={50} height={50} />
+        <button
+          type="button"
+          onClick={() => {
+            router.push('/');
+          }}
+        >
+          <Image
+            src={nounceIcon}
+            alt="Partycles"
+            width={50}
+            height={50}
+            onClick={() => {
+              router.push('/');
+            }}
+          />
+        </button>
         {/* <Title>
           <Link href="/">Partycles</Link>
         </Title>
@@ -57,12 +72,12 @@ export function Nav() {
         </Title> */}
       </Menu>
 
-      <div style={{ display: "flex", gap: "10px" }}>
+      <div style={{ display: 'flex', gap: '10px' }}>
         <button
           type="button"
           className={styles.infoButton}
           onClick={() => {
-            router.push("/partycles");
+            router.push('/partycles');
           }}
         >
           My particles
@@ -79,22 +94,21 @@ export function Nav() {
           }) => {
             // Note: If your app doesn't use authentication, you
             // can remove all 'authenticationStatus' checks
-            const ready = mounted && authenticationStatus !== "loading";
+            const ready = mounted && authenticationStatus !== 'loading';
             const connected =
               ready &&
               account &&
               chain &&
-              (!authenticationStatus ||
-                authenticationStatus === "authenticated");
+              (!authenticationStatus || authenticationStatus === 'authenticated');
 
             return (
               <div
                 {...(!ready && {
-                  "aria-hidden": true,
+                  'aria-hidden': true,
                   style: {
                     opacity: 0,
-                    pointerEvents: "none",
-                    userSelect: "none",
+                    pointerEvents: 'none',
+                    userSelect: 'none',
                   },
                 })}
               >
@@ -122,10 +136,10 @@ export function Nav() {
                     );
                   }
                   return (
-                    <div style={{ display: "flex", gap: 12 }}>
+                    <div style={{ display: 'flex', gap: 12 }}>
                       <button
                         onClick={openChainModal}
-                        style={{ display: "flex", alignItems: "center" }}
+                        style={{ display: 'flex', alignItems: 'center' }}
                         type="button"
                         className={styles.connectButton}
                       >
@@ -136,13 +150,13 @@ export function Nav() {
                               width: 20,
                               height: 20,
                               borderRadius: 999,
-                              overflow: "hidden",
+                              overflow: 'hidden',
                               marginRight: 4,
                             }}
                           >
                             {chain.iconUrl && (
                               <img
-                                alt={chain.name ?? "Chain icon"}
+                                alt={chain.name ?? 'Chain icon'}
                                 src={chain.iconUrl}
                                 style={{ width: 20, height: 20 }}
                               />
