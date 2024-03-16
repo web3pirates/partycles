@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 import {ERC404} from "lib/erc404/contracts/ERC404.sol";
 import {Ownable} from "lib/v4-periphery/lib/v4-core/lib/openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Strings} from "lib/v4-periphery/lib/v4-core/lib/openzeppelin-contracts/contracts/utils/Strings.sol";
 import {DoubleEndedQueue} from "lib/erc404/contracts/lib/DoubleEndedQueue.sol";
 import {VRFConsumerBaseV2} from "lib/chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
 import {IPartycleHook} from "./interfaces/IPartycleHook.sol";
@@ -12,9 +13,12 @@ import {VRFCoordinatorV2Interface} from "lib/chainlink/contracts/src/v0.8/vrf/in
 contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     using DoubleEndedQueue for DoubleEndedQueue.Uint256Deque;
 
-    IPartycleHook partycleHook;
-    address VRFConsumerV2Address = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+    IPartycleHook immutable partycleHook;
+    VRFCoordinatorV2Interface constant VRFCoordinator =
+        VRFCoordinatorV2Interface(0x50d47e4142598E3411aA864e08a44284e471AC6f);
     uint256 private randomNumber;
+    string public baseURI =
+        "https://tideprotocol.infura-ipfs.io/ipfs/QmYi7EYKTztEmWGFBWGydC8V8wqjexsY2N3pgqpGnMvDFC";
 
     constructor(
         string memory _name,
@@ -24,9 +28,13 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     )
         ERC404(_name, _symbol, _decimals)
         Ownable()
-        VRFConsumerBaseV2(VRFConsumerV2Address)
+        VRFConsumerBaseV2(address(VRFCoordinator))
     {
         partycleHook = _hook;
+    }
+
+    function setBaseURI(string memory _baseURI) public {
+        baseURI = _baseURI;
     }
 
     function mintERC20(address to, uint256 value) external {
@@ -106,15 +114,13 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     }
 
     function generateRandomNumber() public {
-        uint256 requestId = VRFCoordinatorV2Interface(
-            0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
-        ).requestRandomWords(
-                0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c,
-                10257,
-                200,
-                1000000,
-                1
-            );
+        uint256 requestId = VRFCoordinator.requestRandomWords(
+            0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c,
+            10257,
+            200,
+            1000000,
+            1
+        );
     }
 
     function _exists(uint256 tokenId) internal view returns (bool) {
@@ -122,6 +128,17 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     }
 
     function tokenURI(
-        uint256 id_
-    ) public view virtual override returns (string memory) {}
+        uint256 id
+    ) public view virtual override returns (string memory) {
+        uint256 modulo = id % 10;
+        return
+            string(
+                abi.encodePacked(
+                    baseURI,
+                    "/",
+                    Strings.toString(modulo),
+                    ".json"
+                )
+            );
+    }
 }
