@@ -10,6 +10,10 @@ export default function PartycleView() {
     () => Number(router.query.id as string),
     [router.query.id]
   );
+  const tokenId = useMemo(
+    () => Number(router.query.tokenId as string),
+    [router.query.tokenId]
+  );
 
   return (
     <>
@@ -19,9 +23,9 @@ export default function PartycleView() {
           <div className="grid grid-cols-12">
             <div className="col-span-5">
               <h1 className="mb-2 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 text-5xl font-black">
-                Partycle #{id}
+                Partycle #{tokenId}
               </h1>
-              <img src={partyclesImages[0]} className="w-[400px] h-[400px]" />
+              <img src={partyclesImages[id]} className="w-[400px] h-[400px]" />
             </div>
             <div className="col-span-7 flex justify-between">
               <button className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
@@ -31,7 +35,7 @@ export default function PartycleView() {
                 type="button"
                 className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
               >
-                Sell 0.0017 ETH
+                Sell for 0.0017 ETH
               </button>
             </div>
           </div>

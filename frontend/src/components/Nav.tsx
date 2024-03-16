@@ -1,16 +1,10 @@
 import nounceIcon from "../../public/images/nouseicon.jpeg";
 import styles from "../styles/styles.module.css";
-import { wagmiConfig } from "@/providers";
-import { useSharedState } from "@/utils/store";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 import styled from "styled-components";
-import { getEnsName } from "viem/actions";
-import { mainnet } from "viem/chains";
-import { http, useAccount, useEnsAddress, useEnsName } from "wagmi";
+import { useAccount, useEnsName } from "wagmi";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -64,12 +58,6 @@ export function Nav() {
             }}
           />
         </button>
-        {/* <Title>
-          <Link href="/">Partycles</Link>
-        </Title>
-        <Title>
-          <Link href="/testAtoms">Atoms styles</Link>
-        </Title> */}
       </Menu>
 
       <div style={{ display: "flex", gap: "10px" }}>

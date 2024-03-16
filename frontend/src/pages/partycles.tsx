@@ -38,7 +38,9 @@ export default function partycles() {
             {partycles?.map((party, idx) => (
               <HackathonBox
                 title="Partycles"
-                onClick={() => router.push(`/partycles/${party}`)}
+                onClick={() =>
+                  router.push(`/partycles/${idx}?tokenId=${party}`)
+                }
               >
                 <img src={partyclesImages[idx]} />
                 <Title>PARTY #{party}</Title>
