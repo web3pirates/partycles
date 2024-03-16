@@ -85,7 +85,7 @@ export function Footer() {
       </Links>
 
       <Links>
-        {ensName && (
+        {ensName && ensName.data !== undefined && (
           <Links>
             <Link href={`https://zapper.xyz/account/${ensName.data}`} target="_blank">
               Zapper account @{ensName.data}
