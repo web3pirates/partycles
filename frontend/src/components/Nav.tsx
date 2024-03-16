@@ -41,7 +41,7 @@ export const Menu = styled.div`
 `;
 
 export const connectButtonStyle =
-  "inline-block text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm min-w-32 py-2.5 font-bold text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out whitespace-nowrap";
+  "inline-block text-gray-900 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm min-w-40 py-2.5 font-bold text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out whitespace-nowrap";
 
 export const infoButtonStyle =
   "inline-block whitespace-nowrap text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm min-w-32 py-2.5 font-bold text-center no-underline cursor-pointer transition-colors duration-300 ease-in-out";
@@ -169,7 +169,6 @@ export function Nav() {
                         className={connectButtonStyle}
                       >
                         <div className="flex w-fit mx-auto">
-                          {" "}
                           {chain.hasIcon && (
                             <div
                               style={{
