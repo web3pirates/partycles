@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .navbar {
@@ -32,7 +32,7 @@
 }
 .connectButton {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 6px 12px;
   border: none;
   border-radius: 12px;
   background-color: #007bff;
@@ -44,6 +44,23 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.infoButton {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border: 1px solid #007bff;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #007bff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .fieldInfo {
   color: white;
 }
@@ -79,12 +96,12 @@
   display: grid;
   place-content: center;
   background-color: white;
-  background-image: url('/wallpaper.png');
+  background-image: url("/wallpaper.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .hiddenDiv {

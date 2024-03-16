@@ -82,13 +82,6 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
             revert Unauthorized();
         }
 
-        // We only need to check ERC-721 transfer exempt status for the recipient
-        // since the sender being ERC-721 transfer exempt means they have already
-        // had their ERC-721s stripped away during the rebalancing process.
-        if (erc721TransferExempt(to_)) {
-            revert RecipientIsERC721TransferExempt();
-        }
-
         // Transfer 1 * units ERC-20 and 1 ERC-721 token.
         // ERC-721 transfer exemptions handled above. Can't make it to this point if either is transfer exempt.
         _transferERC20(from_, to_, units);

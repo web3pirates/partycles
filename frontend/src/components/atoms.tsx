@@ -1,5 +1,5 @@
-import { mq } from "@/styles/breakpoints";
-import styled, { keyframes } from "styled-components";
+import { mq } from '@/styles/breakpoints';
+import styled, { keyframes } from 'styled-components';
 
 export const Layout = styled.div`
   // Vertically centered layout
@@ -93,7 +93,10 @@ export const CustomContainer = styled(Container)`
   gap: 1rem;
   align-items: left;
   text-align: left;
-  padding: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
 export const Row = styled.div`
   display: flex;
@@ -214,4 +217,67 @@ export const Loader = styled.div`
   height: 50px;
   animation: ${rotate} 2s linear infinite;
   display: inline-block;
+`;
+
+export const FormGroup = styled.div`
+  margin-bottom: 15px;
+`;
+
+export const GPTDescription = styled.div`
+  background-color: #f3f4f6; /* Light grey background */
+  border: 1px solid #e5e7eb; /* Slightly darker border for depth */
+  border-radius: 8px; /* Rounded corners */
+  padding: 1rem; /* Spacing inside the box */
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  color: #1f2937; /* Dark grey text for readability */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clean, readable font */
+  text-align: left; /* Align text to the left */
+  font-size: 1rem; /* Standard font size */
+  line-height: 1.5; /* Spacing between lines */
+`;
+
+export const HackathonBox = styled.div`
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  width: 300px;
+  text-align: left;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+  }
+
+  h3 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+`;
+
+export const HackathonsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+`;
+
+export const StyledImage = styled.img`
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
 `;
