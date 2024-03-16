@@ -8,22 +8,13 @@ import Uniswap from "../../public/svg/uniswap";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Table } from "@/components/Table";
-import { CreateButton, CustomContainer, Layout } from "@/components/atoms";
-import { useIsMounted } from "@/hooks/useIsMounted";
-import { SwapWidget } from "@uniswap/widgets";
+import { CustomContainer, Layout } from "@/components/atoms";
 import "@uniswap/widgets/fonts.css";
 import Head from "next/head";
 import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import { useReconnect } from "wagmi";
 
 export default function Home() {
-  const isMounted = useIsMounted(); // Prevent Next.js hydration errors
-  const router = useRouter();
-  const { reconnect } = useReconnect();
-
   const [selectedPool, setSelectedPool] = useState<Pool>(pools[0]);
   return (
     <>
@@ -55,7 +46,6 @@ export default function Home() {
                     </div>
                   ))}
                 <div className="mb-8"></div>
-                <Table />
               </div>
             </div>
           </div>

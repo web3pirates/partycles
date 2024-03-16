@@ -1,4 +1,5 @@
 import { partyclesImages } from "../partycles";
+import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CustomContainer, Layout } from "@/components/atoms";
 import { useRouter } from "next/router";
@@ -41,6 +42,7 @@ export default function PartycleView() {
             </div>
           </div>
         </CustomContainer>
+        <Footer />
       </Layout>
     </>
   );
