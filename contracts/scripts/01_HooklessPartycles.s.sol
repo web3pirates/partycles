@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import "../lib/forge-std/src/Script.sol";
 import {Partycle} from "../src/Partycle.sol";
-import {IPartycleHook} from "../src/interfaces/IPartycleHook.sol";
+import {IPartyclesHook} from "../src/interfaces/IPartyclesHook.sol";
 
 contract HooklessPartycleScript is Script {
     function setUp() public {}
@@ -17,7 +17,7 @@ contract HooklessPartycleScript is Script {
             "Partycles",
             "PARTY",
             18,
-            IPartycleHook(address(0))
+            IPartyclesHook(address(0))
         );
     }
 }

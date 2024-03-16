@@ -14,7 +14,7 @@ import {CurrencyLibrary, Currency} from "v4-core/src/types/Currency.sol";
 import {PoolSwapTest} from "v4-core/src/test/PoolSwapTest.sol";
 import {Deployers} from "v4-core/test/utils/Deployers.sol";
 import {Constants} from "v4-core/test/utils/Constants.sol";
-import {PartycleHook} from "../src/PartycleHook.sol";
+import {PartyclesHook} from "../src/PartyclesHook.sol";
 import {HookMiner} from "./utils/HookMiner.sol";
 import {Partycle} from "../src/Partycle.sol";
 import {IPartycle} from "../src/interfaces/IPartycle.sol";
@@ -24,7 +24,7 @@ contract CounterTest is Test, Deployers {
     using PoolIdLibrary for PoolKey;
     using CurrencyLibrary for Currency;
 
-    PartycleHook hook;
+    PartyclesHook hook;
     Partycle partycle;
     PoolId poolId;
     IERC20 token0;
@@ -46,10 +46,10 @@ contract CounterTest is Test, Deployers {
         (address hookAddress, bytes32 salt) = HookMiner.find(
             address(this),
             flags,
-            type(PartycleHook).creationCode,
+            type(PartyclesHook).creationCode,
             abi.encode(address(manager))
         );
-        hook = new PartycleHook{salt: salt}(IPoolManager(address(manager)));
+        hook = new PartyclesHook{salt: salt}(IPoolManager(address(manager)));
         require(
             address(hook) == hookAddress,
             "CounterTest: hook address mismatch"
