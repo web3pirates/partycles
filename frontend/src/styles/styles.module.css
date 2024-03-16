@@ -44,6 +44,22 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.infoButton {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid #007bff;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #007bff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .fieldInfo {
   color: white;
 }
