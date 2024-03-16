@@ -52,7 +52,7 @@ export function Footer() {
       )}
 
       <Links>
-        <Link href="https://github.com/s" target="_blank">
+        <Link href="https://github.com/web3pirates/partycles" target="_blank">
           <GithubIcon />
         </Link>
       </Links>
