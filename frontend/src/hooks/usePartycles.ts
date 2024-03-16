@@ -26,7 +26,11 @@ export function usePartycles() {
     return (
       res?.data.users.map((u) => ({
         ...u,
-        gained: Number(u.gained.slice(0, u.gained.length - 18)),
+        gained: Number(
+          u.gained.slice(0, u.gained.length - 18) +
+            "." +
+            u.gained.slice(u.gained.length - 18, u.gained.length - 16)
+        ),
       })) || []
     );
   }
