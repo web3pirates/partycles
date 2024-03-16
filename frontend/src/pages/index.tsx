@@ -8,13 +8,16 @@ import Uniswap from "../../public/svg/uniswap";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CustomContainer, Layout } from "@/components/atoms";
+import { usePartycle } from "@/hooks/usePartycle";
 import "@uniswap/widgets/fonts.css";
 import Head from "next/head";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 
 export default function Home() {
   const [selectedPool, setSelectedPool] = useState<Pool>(pools[0]);
+
   return (
     <>
       <Head>
@@ -58,10 +61,7 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
   const { pool, callback } = props;
   return (
     <div className="grid grid-cols-2 w-full mx-[10rem]">
-      <div
-        onClick={() => callback(pool)}
-        className="font-semibold w-full flex items-center text-xl whitespace-nowrap"
-      >
+      <div className="font-semibold w-full flex items-center text-xl whitespace-nowrap">
         10 {pool.token1.symbol}&nbsp;
         <Image
           src={pool.token1.img}
@@ -69,8 +69,8 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
           width={40}
           height={40}
         />
-        &nbsp;
-        {10 * pool.ratio} &nbsp;-&nbsp;{pool.token2.symbol}&nbsp;
+        &nbsp;{"->"}&nbsp;
+        {10 * pool.ratio} &nbsp;{pool.token2.symbol}&nbsp;
         <Image
           src={pool.token2.img}
           alt={pool.token2.symbol}
@@ -78,7 +78,10 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
           height={40}
         />
       </div>
-      <div className="rounded-xl w-min whitespace-nowrap font-semibold px-4 py-2 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 hover:cursor-pointer">
+      <div
+        className="rounded-xl w-min whitespace-nowrap font-semibold px-4 py-2 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 hover:cursor-pointer"
+        onClick={() => callback(pool)}
+      >
         Swap now!
       </div>
     </div>
@@ -87,6 +90,12 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
 
 const Swap = (props: { pool: Pool }) => {
   const { pool } = props;
+  const { address } = useAccount();
+  const { mintERC20 } = usePartycle();
+  const swapToken = async () => {
+    if (!address) return;
+    await mintERC20(address, BigInt(5e16));
+  };
   return (
     <>
       <div className="w-full mx-auto">
@@ -115,7 +124,12 @@ const Swap = (props: { pool: Pool }) => {
             height={30}
           />
         </div>
-        <button className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
+        <button
+          className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+          onClick={async () => {
+            await swapToken();
+          }}
+        >
           SWAP
         </button>
       </div>
@@ -169,7 +183,7 @@ const pools = [
     id: 3,
     token1: usdcToken,
     token2: ethToken,
-    ratio: 0.000273233,
+    ratio: 0.0002732,
   },
   {
     id: 4,
