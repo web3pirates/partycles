@@ -1,7 +1,7 @@
 type User @entity {
   id: Bytes!
   gained: BigInt!
-  nftd: [NFT!]! @derivedFrom(field: "owner")
+  nfts: [NFT!]! @derivedFrom(field: "owner")
 }
 
 type NFT @entity {
