@@ -71,6 +71,24 @@ export function Nav() {
           type="button"
           className={styles.infoButton}
           onClick={() => {
+            router.push("/");
+          }}
+        >
+          Swap
+        </button>
+        <button
+          type="button"
+          className={styles.infoButton}
+          onClick={() => {
+            router.push("/leaderboard");
+          }}
+        >
+          Leaderboard
+        </button>
+        <button
+          type="button"
+          className={styles.infoButton}
+          onClick={() => {
             router.push("/partycles");
           }}
         >
