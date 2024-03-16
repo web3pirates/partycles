@@ -1,7 +1,8 @@
-import { GithubIcon } from "@/assets/icons";
-import { mq } from "@/styles/breakpoints";
-import styled from "styled-components";
-import { useAccount, useEnsName } from "wagmi";
+import { GithubIcon } from '@/assets/icons';
+import { mq } from '@/styles/breakpoints';
+import Image from 'next/image';
+import styled from 'styled-components';
+import { useAccount, useEnsName } from 'wagmi';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -23,6 +24,13 @@ export const Links = styled.div`
   gap: 1.5rem;
 `;
 
+export const Socials = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2rem;
+`;
+
 const Link = styled.a`
   color: rgba(0, 0, 0, 0.5);
   font-weight: 600;
@@ -37,27 +45,55 @@ const Link = styled.a`
 
 export function Footer() {
   const { address } = useAccount();
-  const ensName = useEnsName({ address, blockTag: "latest", chainId: 1 });
+  const ensName = useEnsName({ address, blockTag: 'latest', chainId: 1 });
   return (
     <Wrapper>
-      {ensName && (
-        <Links>
-          <Link
-            href={`https://zapper.xyz/account/${ensName.data}`}
-            target="_blank"
-          >
-            Zapper account @{ensName.data}
+      <Links>
+        <Socials>
+          <Image
+            src="https://ca.slack-edge.com/T02742R3GCA-U03K7DS332B-6baeeda84c7a-512"
+            alt="Partycles"
+            width={32}
+            height={32}
+          />
+          <Link href="https://twitter.com/albygiaco98" target="_blank">
+            albygiaco
           </Link>
-        </Links>
-      )}
+        </Socials>
+        <Socials>
+          <Image
+            src="https://ca.slack-edge.com/T02742R3GCA-U02L1AG06AX-5559e1b0da72-512"
+            alt=""
+            width={32}
+            height={32}
+          />{' '}
+          <Link href="https://twitter.com/0xreekee" target="_blank">
+            reekee
+          </Link>
+        </Socials>
+        <Socials>
+          <Image
+            src="https://ca.slack-edge.com/T02742R3GCA-U027GNCE317-9edefd667b4b-512"
+            alt=""
+            width={32}
+            height={32}
+          />
+          <Link href="https://twitter.com/luduvigo" target="_blank">
+            luduvigo
+          </Link>
+        </Socials>
+      </Links>
 
       <Links>
-        <Link
-          href="https://github.com/web3pirates/partycles"
-          target="_blank"
-          className="flex"
-        >
-          Partycles ®<GithubIcon />
+        {ensName && ensName.data !== undefined && (
+          <Links>
+            <Link href={`https://zapper.xyz/account/${ensName.data}`} target="_blank">
+              Zapper account @{ensName.data}
+            </Link>
+          </Links>
+        )}
+        <Link href="https://github.com/web3pirates/partycles" target="_blank">
+          <GithubIcon />
         </Link>
       </Links>
     </Wrapper>
