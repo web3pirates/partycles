@@ -2,6 +2,8 @@ import { Footer } from '@/components/Footer';
 import { Nav } from '@/components/Nav';
 import { CreateButton, CustomContainer, Layout } from '@/components/atoms';
 import { useIsMounted } from '@/hooks/useIsMounted';
+import { SwapWidget } from '@uniswap/widgets';
+import '@uniswap/widgets/fonts.css';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -29,9 +31,9 @@ export default function Home() {
             rewarding users with NFT scratch cards containing ERC20 rewards.
           </p>
 
-          <Link href="/example/create" passHref>
-            <CreateButton>Create cool app</CreateButton>
-          </Link>
+          <div className="Uniswap">
+            <SwapWidget />
+          </div>
 
           <p></p>
           <br />
