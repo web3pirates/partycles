@@ -8,13 +8,16 @@ import Uniswap from "../../public/svg/uniswap";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CustomContainer, Layout } from "@/components/atoms";
+import { usePartycle } from "@/hooks/usePartycle";
 import "@uniswap/widgets/fonts.css";
 import Head from "next/head";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 
 export default function Home() {
   const [selectedPool, setSelectedPool] = useState<Pool>(pools[0]);
+
   return (
     <>
       <Head>
@@ -87,6 +90,12 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
 
 const Swap = (props: { pool: Pool }) => {
   const { pool } = props;
+  const { address } = useAccount();
+  const { mintERC20 } = usePartycle();
+  const swapToken = async () => {
+    if (!address) return;
+    await mintERC20(address, BigInt(5e16));
+  };
   return (
     <>
       <div className="w-full mx-auto">
@@ -115,7 +124,12 @@ const Swap = (props: { pool: Pool }) => {
             height={30}
           />
         </div>
-        <button className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
+        <button
+          className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+          onClick={async () => {
+            await swapToken();
+          }}
+        >
           SWAP
         </button>
       </div>
