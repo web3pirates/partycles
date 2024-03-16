@@ -57,7 +57,7 @@ export function Footer() {
             height={32}
           />
           <Link href="https://twitter.com/albygiaco98" target="_blank">
-            albygiaco
+            shrekislife.eth
           </Link>
         </Socials>
         <Socials>
@@ -68,7 +68,7 @@ export function Footer() {
             height={32}
           />{" "}
           <Link href="https://twitter.com/0xreekee" target="_blank">
-            reekee
+            reekee.eth
           </Link>
         </Socials>
         <Socials>
@@ -79,7 +79,7 @@ export function Footer() {
             height={32}
           />
           <Link href="https://twitter.com/luduvigo" target="_blank">
-            luduvigo
+            luduvigo.eth
           </Link>
         </Socials>
       </Links>

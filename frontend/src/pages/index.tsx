@@ -28,7 +28,6 @@ export default function Home() {
 
         <CustomContainer as="main">
           <div className="w-full">
-            <h1 className="mx-auto w-fit">Partycles</h1>
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-4">
                 <Swap pool={selectedPool} />
@@ -113,7 +112,7 @@ const Swap = (props: { pool: Pool }) => {
             height={30}
           />
         </div>
-        <button className="mt-4 h-fit w-full text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
+        <button className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
           SWAP
         </button>
       </div>
@@ -168,5 +167,23 @@ const pools = [
     token1: usdcToken,
     token2: ethToken,
     ratio: 0.000273233,
+  },
+  {
+    id: 4,
+    token1: apeToken,
+    token2: cakeToken,
+    ratio: 9.57,
+  },
+  {
+    id: 5,
+    token1: apeToken,
+    token2: ethToken,
+    ratio: 0.000592,
+  },
+  {
+    id: 6,
+    token1: cakeToken,
+    token2: ethToken,
+    ratio: 0.000062,
   },
 ];

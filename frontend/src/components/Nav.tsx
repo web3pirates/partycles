@@ -53,6 +53,7 @@ export function Nav() {
           onClick={() => {
             router.push("/");
           }}
+          className="flex items-center gap-2"
         >
           <Image
             src={nounceIcon}
@@ -63,6 +64,12 @@ export function Nav() {
               router.push("/");
             }}
           />
+          <div className="relative inline-block ml-4">
+            <h1 className="mx-auto w-fit bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-orange-400 to-yellow-600">
+              Partycles
+            </h1>
+            <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-orange-400 to-yellow-600 rounded-full"></span>
+          </div>
         </button>
       </Menu>
 
