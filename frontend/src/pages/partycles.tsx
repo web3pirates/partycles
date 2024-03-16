@@ -20,8 +20,8 @@ export default function partycles() {
   const { address } = useAccount();
   const { fetchUserPartycles } = usePartycles();
 
-  const partycles = useAsyncMemo(() => {
-    if (address) return fetchUserPartycles(address);
+  const partycles = useAsyncMemo(async () => {
+    if (address) return await fetchUserPartycles(address);
   }, [address]);
 
   return (

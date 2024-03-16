@@ -2,6 +2,35 @@ import ApolloClient from "@/utils/ApolloClient";
 import { gql } from "@apollo/client";
 
 export function usePartycles() {
+  async function fetchLeaderboard(): Promise<{ id: string; gained: number }[]> {
+    let res;
+    try {
+      res = await ApolloClient.query<{
+        users: Array<{ id: string; gained: string }>;
+      }>({
+        query: gql`
+          query {
+            users(first: 100, orderBy: "gained", orderDirections: "desc") {
+              id
+              gained
+            }
+          }
+        `,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    console.log(res);
+
+    return (
+      res?.data.users.map((u) => ({
+        ...u,
+        gained: Number(u.gained.slice(0, u.gained.length - 18)),
+      })) || []
+    );
+  }
+
   async function fetchUserPartycles(userAddress: string): Promise<string[]> {
     let res;
     try {
@@ -53,5 +82,6 @@ export function usePartycles() {
   return {
     fetchPartycles,
     fetchUserPartycles,
+    fetchLeaderboard,
   };
 }
