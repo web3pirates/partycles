@@ -7,4 +7,5 @@ type User @entity {
 type NFT @entity {
   id: ID!
   owner: User!
+  tokenURI: String!
 }

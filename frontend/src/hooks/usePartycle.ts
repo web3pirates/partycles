@@ -12,22 +12,8 @@ import {
 } from "wagmi/actions";
 
 export function usePartycle() {
-  async function scratch(userAddress: string, idx: number) {
+  async function scratch(tokenId: string) {
     try {
-      const res = await ApolloClient.query<{
-        user: { nfts: Array<{ id: string }> };
-      }>({
-        query: gql`query {
-            user(id: "${userAddress}") {
-              nfts {
-                id
-              }
-            }
-        }`,
-      });
-
-      const tokenId = res.data.user.nfts[idx].id;
-
       const hash = await writeContract(wagmiConfig, {
         abi: partycleAbi,
         address: PARTYCLE_CONTRACT,

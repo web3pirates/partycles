@@ -33,16 +33,43 @@ export function useGraph() {
     );
   }
 
-  async function fetchUserPartycles(userAddress: string): Promise<string[]> {
+  async function fetchParty(
+    tokenId: string
+  ): Promise<{ id: string; tokenURI: string } | undefined> {
     let res;
     try {
       res = await ApolloClient.query<{
-        user: { nfts: Array<{ id: string }> };
+        nft: { id: string; tokenURI: string };
+      }>({
+        query: gql`query {
+            nft(id: "${tokenId}") {
+              id
+              tokenURI
+            }
+        }`,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    return res?.data.nft;
+  }
+
+  async function fetchUserPartycles(
+    userAddress: string
+  ): Promise<{ id: string; tokenURI: string; partyNumber: string }[]> {
+    let res;
+    try {
+      res = await ApolloClient.query<{
+        user: {
+          nfts: Array<{ id: string; tokenURI: string }>;
+        };
       }>({
         query: gql`query {
             user(id: "${userAddress}") {
               nfts {
                 id
+                tokenURI
               }
             }
         }`,
@@ -52,20 +79,26 @@ export function useGraph() {
     }
 
     return (
-      res?.data.user.nfts.map((n) => n.id.substring(n.id.length - 5)) || []
+      res?.data.user.nfts.map((n) => ({
+        ...n,
+        partyNumber: n.id.substring(n.id.length - 5),
+      })) || []
     );
   }
 
-  async function fetchPartycles(): Promise<string[]> {
+  async function fetchPartycles(): Promise<
+    { id: string; tokenURI: string; partyNumber: string }[]
+  > {
     let res;
     try {
       res = await ApolloClient.query<{
-        nfts: Array<{ id: string }>;
+        nfts: Array<{ id: string; tokenURI: string }>;
       }>({
         query: gql`
           query {
             nfts(first: 1000) {
               id
+              tokenURI
             }
           }
         `,
@@ -74,14 +107,18 @@ export function useGraph() {
       console.error(e);
     }
 
-    console.log(res);
-
-    return res?.data.nfts.map((n) => n.id.substring(n.id.length - 5)) || [];
+    return (
+      res?.data.nfts.map((n) => ({
+        ...n,
+        partyNumber: n.id.substring(n.id.length - 5),
+      })) || []
+    );
   }
 
   return {
     fetchPartycles,
     fetchUserPartycles,
     fetchLeaderboard,
+    fetchParty,
   };
 }
