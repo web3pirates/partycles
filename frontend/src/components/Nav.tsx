@@ -105,7 +105,7 @@ export function Nav() {
             router.push("/partycles");
           }}
         >
-          My particles
+          My Partycles
         </button>
         <div className="ml-6"></div>
         <ConnectButton.Custom>
