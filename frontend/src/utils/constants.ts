@@ -1,0 +1,2 @@
+export const PARTYCLE_CONTRACT = "0x45619dD8F3AEb12dD46Ee2Efd0aC43bF4c7824Fa";
+export const USDC_CONTRACT = "0xa";

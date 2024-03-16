@@ -1,7 +1,7 @@
 import ApolloClient from "@/utils/ApolloClient";
 import { gql } from "@apollo/client";
 
-export function usePartycles() {
+export function useGraph() {
   async function fetchLeaderboard(): Promise<{ id: string; gained: number }[]> {
     let res;
     try {
@@ -20,8 +20,6 @@ export function usePartycles() {
     } catch (e) {
       console.error(e);
     }
-
-    console.log(res);
 
     return (
       res?.data.users.map((u) => ({
@@ -52,8 +50,6 @@ export function usePartycles() {
     } catch (e) {
       console.error(e);
     }
-
-    console.log(res);
 
     return (
       res?.data.user.nfts.map((n) => n.id.substring(n.id.length - 5)) || []

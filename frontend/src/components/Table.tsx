@@ -1,9 +1,9 @@
-import { usePartycles } from "@/hooks/usePartycles";
+import { useGraph } from "@/hooks/useGraph";
 import { useAsyncMemo } from "use-async-memo";
 import { useEnsName } from "wagmi";
 
 export const Table = () => {
-  const { fetchLeaderboard } = usePartycles();
+  const { fetchLeaderboard } = useGraph();
 
   const leaderboard = useAsyncMemo(async () => await fetchLeaderboard(), []);
   return (

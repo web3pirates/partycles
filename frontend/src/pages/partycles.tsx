@@ -7,8 +7,8 @@ import {
   HackathonBox,
   HackathonsContainer,
 } from "@/components/atoms";
+import { useGraph } from "@/hooks/useGraph";
 import { useIsMounted } from "@/hooks/useIsMounted";
-import { usePartycles } from "@/hooks/usePartycles";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useAsyncMemo } from "use-async-memo";
@@ -18,7 +18,7 @@ export default function partycles() {
   const isMounted = useIsMounted(); // Prevent Next.js hydration errors
   const router = useRouter();
   const { address } = useAccount();
-  const { fetchUserPartycles } = usePartycles();
+  const { fetchUserPartycles } = useGraph();
 
   const partycles = useAsyncMemo(async () => {
     if (address) return await fetchUserPartycles(address);
