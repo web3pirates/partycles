@@ -14,12 +14,18 @@ import {PoolSwapTest} from "v4-core/src/test/PoolSwapTest.sol";
 import {Deployers} from "v4-core/test/utils/Deployers.sol";
 import {PartycleHook} from "../src/PartycleHook.sol";
 import {HookMiner} from "./utils/HookMiner.sol";
+import {Partycle} from "../src/Partycle.sol";
+import {INounsDescriptorV2} from "lib/nouns-monorepo/packages/nouns-contracts/contracts/interfaces/INounsDescriptorV2.sol";
+import {INounsSeeder} from "lib/nouns-monorepo/packages/nouns-contracts/contracts/interfaces/INounsSeeder.sol";
 
 contract CounterTest is Test, Deployers {
     using PoolIdLibrary for PoolKey;
     using CurrencyLibrary for Currency;
 
     PartycleHook hook;
+    Partycle partycle;
+    INounsSeeder seeder;
+    INounsDescriptorV2 descriptor;
     PoolId poolId;
 
     function setUp() public {
@@ -70,6 +76,15 @@ contract CounterTest is Test, Deployers {
                 10 ether
             ),
             ZERO_BYTES
+        );
+
+        partycle = new Partycle(
+            "Partycle",
+            "PARTY",
+            18,
+            descriptor,
+            seeder,
+            address(hook)
         );
     }
 

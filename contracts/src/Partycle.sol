@@ -7,7 +7,7 @@ import {INounsSeeder} from "lib/nouns-monorepo/packages/nouns-contracts/contract
 import {Ownable} from "lib/v4-periphery/lib/v4-core/lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import {DoubleEndedQueue} from "lib/erc404/contracts/lib/DoubleEndedQueue.sol";
 
-abstract contract Partycle is ERC404, Ownable {
+contract Partycle is ERC404, Ownable {
     using DoubleEndedQueue for DoubleEndedQueue.Uint256Deque;
     INounsDescriptorMinimal descriptor;
     INounsSeeder seeder;
@@ -29,7 +29,7 @@ abstract contract Partycle is ERC404, Ownable {
         INounsDescriptorMinimal _descriptor,
         INounsSeeder _seeder,
         address _minter
-    ) ERC404(_name, _symbol, _decimals) {
+    ) ERC404(_name, _symbol, _decimals) Ownable() {
         descriptor = _descriptor;
         seeder = _seeder;
         minter = _minter;
