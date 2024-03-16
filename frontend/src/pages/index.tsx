@@ -26,7 +26,7 @@ export default function Home() {
 
         <CustomContainer as="main">
           <div className="w-full">
-            <h1 className="mb-4">Partycles</h1>
+            <h1>Partycles</h1>
             <div className="flex gap-4">
               <div className="Uniswap">
                 <SwapWidget />

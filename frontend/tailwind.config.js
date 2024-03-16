@@ -22,6 +22,9 @@ module.exports = {
       flexBasis: {
         "fit-content": "fit-content",
       },
+      boxShadow: {
+        uni: "0px 40px 120px 0px hsla(328,97%,53%,0.12)",
+      },
       screens: {
         "3xl": "1600px",
       },
@@ -37,6 +40,9 @@ module.exports = {
         "span-18": "span 18 / span 18",
       },
       colors: {
+        gold: "#CFAF6D",
+        silver: "#C0C0C0",
+        bronze: "#CD7F32",
         custom: {
           gray: {
             900: "rgb(249 250 251 / <alpha-value>)",
@@ -48,6 +54,8 @@ module.exports = {
             300: "rgb(85 94 116 / <alpha-value>)",
             200: "rgb(31 41 56 / <alpha-value>)",
             100: "rgb(9 14 20 / <alpha-value>)",
+            uni: "rgb(13 17 28 / <alpha-value>)",
+            uniborder: "rgb(92 102 132 / <alpha-value>)",
           },
           yellow: {
             900: "rgb(253 246 178 / <alpha-value>)",

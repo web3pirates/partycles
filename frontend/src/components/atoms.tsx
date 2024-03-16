@@ -10,7 +10,6 @@ export const Layout = styled.div`
   background-color: #f4f7fa;
   color: #1d3b3b;
   gap: 3rem;
-
   width: 100%;
   padding: 2rem;
   min-height: 100svh;
@@ -97,6 +96,7 @@ export const CustomContainer = styled(Container)`
   padding-bottom: 0.5rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  margin-top: 4rem;
 `;
 export const Row = styled.div`
   display: flex;
