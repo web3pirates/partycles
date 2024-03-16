@@ -26,6 +26,8 @@ contract CounterTest is Test, Deployers {
     PartycleHook hook;
     Partycle partycle;
     PoolId poolId;
+    IERC20 token0;
+    IERC20 token1;
     address alice = vm.addr(1);
 
     function setUp() public {
@@ -56,8 +58,8 @@ contract CounterTest is Test, Deployers {
         hook.setPartycle(IPartycle(address(partycle)));
 
         // approve tokens to hook
-        IERC20 token0 = IERC20(address(uint160(currency0.toId())));
-        IERC20 token1 = IERC20(address(uint160(currency1.toId())));
+        token0 = IERC20(address(uint160(currency0.toId())));
+        token1 = IERC20(address(uint160(currency1.toId())));
         token0.transfer(alice, 10e18);
         token1.transfer(alice, 10e18);
         vm.startPrank(alice);
@@ -103,6 +105,13 @@ contract CounterTest is Test, Deployers {
         );
 
         assertEq(int256(swapDelta.amount0()), amountSpecified);
+        assert(partycle.erc20BalanceOf(alice) > 0);
+    }
+
+    function testAccumulation() public {
+        uint256 balance = partycle.erc721BalanceOf(alice);
+        partycle.mintERC20(alice, 1e18);
+        assertEq(partycle.erc721BalanceOf(alice) - balance, 1);
     }
 
     function testLiquidityHooks() public {
