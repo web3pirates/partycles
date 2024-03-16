@@ -55,7 +55,7 @@ contract CounterTest is Test, Deployers {
             "CounterTest: hook address mismatch"
         );
 
-        partycle = new Partycle("Partycle", "PARTY", 18);
+        partycle = new Partycle("Partycle", "PARTY", 18, hook);
         hook.setPartycle(IPartycle(address(partycle)));
 
         // approve tokens to hook
@@ -122,7 +122,7 @@ contract CounterTest is Test, Deployers {
         uint256 balanceERC20 = partycle.erc20BalanceOf(alice);
 
         vm.startPrank(alice);
-        partycle.scratch(minted[0]);
+        partycle.scratch(minted[0], token0);
         vm.stopPrank();
 
         assertEq(partycle.erc721BalanceOf(alice), balanceERC721 - 1);

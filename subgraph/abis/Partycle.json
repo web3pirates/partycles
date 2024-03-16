@@ -15,6 +15,11 @@
         "internalType": "uint8",
         "name": "_decimals",
         "type": "uint8"
+      },
+      {
+        "internalType": "contract IPartycleHook",
+        "name": "_hook",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -894,6 +899,11 @@
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
+      },
+      {
+        "internalType": "contract IERC20",
+        "name": "prizeToken",
+        "type": "address"
       }
     ],
     "name": "scratch",

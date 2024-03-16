@@ -9,10 +9,11 @@ import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
 import {IPartycle} from "./interfaces/IPartycle.sol";
+import {IPartycleHook} from "./interfaces/IPartycleHook.sol";
 import {IERC20} from "../lib/v4-core/lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol";
 import {Currency, CurrencyLibrary} from "../lib/v4-core/src/types/Currency.sol";
 
-contract PartycleHook is BaseHook {
+contract PartycleHook is BaseHook, IPartycleHook {
     using PoolIdLibrary for PoolKey;
     using CurrencyLibrary for Currency;
 
@@ -112,7 +113,7 @@ contract PartycleHook is BaseHook {
     // requires calldata to be an abi.encoded address of the user's wallet
     function afterAddLiquidity(
         address,
-        PoolKey calldata key,
+        PoolKey calldata,
         IPoolManager.ModifyLiquidityParams calldata liquidityParams,
         BalanceDelta,
         bytes calldata data
@@ -125,5 +126,12 @@ contract PartycleHook is BaseHook {
         partycle.mintERC20(swapper, amount);
 
         return BaseHook.afterAddLiquidity.selector;
+    }
+
+    function awardPrize(IERC20 token, address winner) public {
+        require(msg.sender == address(partycle));
+
+        uint256 balance = token.balanceOf(address(this));
+        if (balance > 0) token.transfer(winner, balance / 10);
     }
 }

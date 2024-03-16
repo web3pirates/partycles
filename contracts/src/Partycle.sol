@@ -5,29 +5,35 @@ import {ERC404} from "lib/erc404/contracts/ERC404.sol";
 import {Ownable} from "lib/v4-periphery/lib/v4-core/lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import {DoubleEndedQueue} from "lib/erc404/contracts/lib/DoubleEndedQueue.sol";
 import {VRFConsumerBaseV2} from "lib/chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
+import {IPartycleHook} from "./interfaces/IPartycleHook.sol";
+import {IERC20} from "../lib/v4-core/lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol";
 import {VRFCoordinatorV2Interface} from "lib/chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol";
 
 contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     using DoubleEndedQueue for DoubleEndedQueue.Uint256Deque;
 
+    IPartycleHook partycleHook;
     address VRFConsumerV2Address = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
     uint256 private randomNumber;
 
     constructor(
         string memory _name,
         string memory _symbol,
-        uint8 _decimals
+        uint8 _decimals,
+        IPartycleHook _hook
     )
         ERC404(_name, _symbol, _decimals)
         Ownable()
         VRFConsumerBaseV2(VRFConsumerV2Address)
-    {}
+    {
+        partycleHook = _hook;
+    }
 
     function mintERC20(address to, uint256 value) external {
         _mintERC20(to, value);
     }
 
-    function scratch(uint256 tokenId) public {
+    function scratch(uint256 tokenId, IERC20 prizeToken) public {
         require(
             _exists(tokenId),
             "NounsToken: URI query for nonexistent token"
@@ -52,8 +58,12 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
             0;
 
         if (hasWon) {
-            // send prize to the user
+            if (address(partycleHook) == address(0)) {
+                uint256 balance = prizeToken.balanceOf(address(this));
+                prizeToken.transfer(msg.sender, balance / 10);
+            } else partycleHook.awardPrize(prizeToken, msg.sender);
         }
+
         erc721TransferFrom(msg.sender, address(0), tokenId);
     }
 
