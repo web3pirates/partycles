@@ -105,9 +105,7 @@ function LeaderboardRow(props: {
           href={`https://zapper.xyz/account/${user.id}`}
           className="text-bright-blue gap-x-1 max-w-[12rem] text-ellipsis overflow-hidden group underline"
         >
-          {(userEns || user.id).length > 40
-            ? `${(userEns || user.id).slice(0, 15)}...`
-            : userEns || user.id}
+          {userEns || user.id}
         </a>
       </td>
 

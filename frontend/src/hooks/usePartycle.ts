@@ -5,7 +5,7 @@ import { PARTYCLE_CONTRACT, USDC_CONTRACT } from "@/utils/constants";
 import { gql } from "@apollo/client";
 import { waitForTransaction, writeContract } from "wagmi/actions";
 
-export function useGraph() {
+export function usePartycle() {
   async function scratch(userAddress: string, idx: number) {
     try {
       const res = await ApolloClient.query<{
