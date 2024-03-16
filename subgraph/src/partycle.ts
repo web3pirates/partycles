@@ -5,7 +5,7 @@ import {
 import { NFT, User } from "../generated/schema";
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 
-export function handleERC20Transfer(event: ERC20Transfer) {
+export function handleERC20Transfer(event: ERC20Transfer): void {
   // we want only to track mints, for balance we can use contract calls
   if (event.params.from == Address.zero()) {
     let user = User.load(event.params.to);
@@ -20,7 +20,7 @@ export function handleERC20Transfer(event: ERC20Transfer) {
   }
 }
 
-export function handleERC721Transfer(event: ERC721Transfer) {
+export function handleERC721Transfer(event: ERC721Transfer): void {
   const id = "noun-" + event.params.id.toString();
   let erc721 = NFT.load(id);
   if (!erc721) erc721 = new NFT(id);

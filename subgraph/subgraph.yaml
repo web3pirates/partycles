@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: Partycle
-    network: arbitrum-one
+    network: arbitrum-sepolia
     source:
-      address: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+      address: "0x45619dD8F3AEb12dD46Ee2Efd0aC43bF4c7824Fa"
       abi: Partycle
-      startBlock: 34266938
+      startBlock: 23813880
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
