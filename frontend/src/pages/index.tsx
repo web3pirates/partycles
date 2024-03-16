@@ -1,13 +1,14 @@
-import { Footer } from '@/components/Footer';
-import { Nav } from '@/components/Nav';
-import { CreateButton, CustomContainer, Layout } from '@/components/atoms';
-import { useIsMounted } from '@/hooks/useIsMounted';
-import { SwapWidget } from '@uniswap/widgets';
-import '@uniswap/widgets/fonts.css';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useReconnect } from 'wagmi';
+import { Footer } from "@/components/Footer";
+import { Nav } from "@/components/Nav";
+import { Table } from "@/components/Table";
+import { CreateButton, CustomContainer, Layout } from "@/components/atoms";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import { SwapWidget } from "@uniswap/widgets";
+import "@uniswap/widgets/fonts.css";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useReconnect } from "wagmi";
 
 export default function Home() {
   const isMounted = useIsMounted(); // Prevent Next.js hydration errors
@@ -24,20 +25,15 @@ export default function Home() {
         <Nav />
 
         <CustomContainer as="main">
-          <h1>Partycles</h1>
-          <p>
-            Welcome to Partycles, where collecting partycles gets you invited to the reward party!{' '}
-            <br />
-            Partycles incentivizes activity on UniV4 pools and rewards users with NFT scratch cards
-            containing ERC20.
-          </p>
-
-          <div className="Uniswap">
-            <SwapWidget />
+          <div className="w-full">
+            <h1 className="mb-4">Partycles</h1>
+            <div className="flex gap-4">
+              <div className="Uniswap">
+                <SwapWidget />
+              </div>
+              <Table />
+            </div>
           </div>
-
-          <p></p>
-          <br />
         </CustomContainer>
         <Footer />
       </Layout>
