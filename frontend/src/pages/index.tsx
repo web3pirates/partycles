@@ -7,7 +7,6 @@ import DoubleArrow from "../../public/svg/doubleArrow";
 import Uniswap from "../../public/svg/uniswap";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
-import { Table } from "@/components/Table";
 import { CustomContainer, Layout } from "@/components/atoms";
 import "@uniswap/widgets/fonts.css";
 import Head from "next/head";
@@ -59,7 +58,7 @@ const Pool = (props: { pool: Pool; callback: (pool: Pool) => void }) => {
   const { pool, callback } = props;
   return (
     <div
-      className="rounded-xl w-full font-semibold py-2 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 hover:cursor-pointer"
+      className="rounded-xl w-full font-semibold py-2 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 hover:cursor-pointer"
       onClick={() => callback(pool)}
     >
       <div className="w-fit mx-auto flex text-xl ">
@@ -112,7 +111,7 @@ const Swap = (props: { pool: Pool }) => {
             height={30}
           />
         </div>
-        <button className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
+        <button className="mt-4 h-fit w-full font-bold text-gray-900 bg-gradient-to-r from-red-400 via-red-300 to-yellow-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
           SWAP
         </button>
       </div>
