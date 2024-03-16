@@ -107,6 +107,7 @@ export function Nav() {
         >
           My particles
         </button>
+        <div className="ml-6"></div>
         <ConnectButton.Custom>
           {({
             account,
