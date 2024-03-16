@@ -3,12 +3,18 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CustomContainer, Layout } from "@/components/atoms";
 import { usePartycle } from "@/hooks/usePartycle";
+import { createWalletAddress, checkPaymentStatus } from "@/payment";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useAccount } from "wagmi";
 
 export default function PartycleView() {
   const router = useRouter();
+  const { isConnected } = useAccount();
+  const [intent, setIntent] = useState("");
+  const [depositAddress, setDepositAddress] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState(false);
+  const [error, setError] = useState("");
   const { scratch } = usePartycle();
   const { address } = useAccount();
   const id = useMemo(
@@ -20,6 +26,28 @@ export default function PartycleView() {
     [router.query.tokenId]
   );
 
+  const createPaymentIntent = async (e: any) => {
+    e.preventDefault();
+    let [intent, address] = await createWalletAddress();
+    if (!intent || !address) return;
+
+    setIntent(intent);
+    setDepositAddress(address);
+  };
+
+  const confirmPayment = async (e: any) => {
+    e.preventDefault();
+    let status = await checkPaymentStatus(intent);
+    if (status) {
+      setIntent("");
+      setDepositAddress("");
+      setError("");
+    } else {
+      setError("Payment not confirmed");
+    }
+
+    setPaymentStatus(status);
+  };
   return (
     <>
       <Layout>
@@ -37,17 +65,39 @@ export default function PartycleView() {
                 onClick={() => {
                   if (address) scratch(address, id);
                 }}
-                className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+                className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-6 py-2.5 text-center me-2 mb-2"
               >
                 Scratch
               </button>
               <button
                 type="button"
-                onClick={() => router.push(`https://opensea.io/${id}/sell`)}
-                className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+                className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-6 py-2.5 text-center me-2 mb-2"
               >
                 Sell
               </button>
+              <form onSubmit={createPaymentIntent}>
+                <button
+                  type="submit"
+                  className="whitespace-nowrap h-fit mt-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+                >
+                  Buy for 1 USDC
+                </button>
+              </form>
+              {intent && depositAddress && !paymentStatus && (
+                <>
+                  <div>Pay 1 USDC to {depositAddress}</div>
+                  <div>Once done please click confirmation</div>
+                  <form onSubmit={confirmPayment}>
+                    <button type="submit">Confirm</button>
+                  </form>
+                </>
+              )}
+              {!intent && !depositAddress && paymentStatus && (
+                <>
+                  <div>Thanks for the payment</div>
+                </>
+              )}
+              {error && <div>{error}</div>}
             </div>
           </div>
         </CustomContainer>
