@@ -28,8 +28,8 @@ export default function Home() {
           <p>
             Welcome to Partycles, where collecting partycles gets you invited to the reward party!{' '}
             <br />
-            Partycles is a platform designed to incentivize and gamify activity on UniV4 pools by
-            rewarding users with NFT scratch cards containing ERC20 rewards.
+            Partycles incentivizes activity on UniV4 pools and rewards users with NFT scratch cards
+            containing ERC20.
           </p>
 
           <div className="Uniswap">

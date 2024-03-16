@@ -25,4 +25,7 @@ module.exports = {
     return config;
   },
   transpilePackages: ['@uniswap/widgets', '@uniswap/conedison'],
+  images: {
+    domains: ['ca.slack-edge.com'],
+  },
 };
