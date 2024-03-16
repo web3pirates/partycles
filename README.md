@@ -10,7 +10,7 @@ Swap fees collected on UniV4 pools are sent to a prize pool. From there, an ERC4
 
 ### Collecting Partycles
 
-As users engage in trading and liquidity provision, they accumulate partycles. Once enough partycles are collected, users can generate a PARTY NFT.
+As users engage in trading and liquidity provision, they accumulate partycles. Once enough partycles are collected, it automatically generates a PARTY NFT.
 
 ### The PARTY NFT
 
