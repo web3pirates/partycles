@@ -10,7 +10,7 @@ export function usePartycles() {
       }>({
         query: gql`
           query {
-            users(first: 100, orderBy: "gained", orderDirections: "desc") {
+            users(first: 100, orderBy: "gained", orderDirection: "desc") {
               id
               gained
             }
