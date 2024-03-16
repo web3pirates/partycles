@@ -1,6 +1,7 @@
 import { GithubIcon } from "@/assets/icons";
 import { mq } from "@/styles/breakpoints";
 import styled from "styled-components";
+import { useAccount, useEnsName } from "wagmi";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -35,13 +36,20 @@ const Link = styled.a`
 `;
 
 export function Footer() {
+  const { address } = useAccount();
+  const ensName = useEnsName({ address, blockTag: "latest", chainId: 1 });
   return (
     <Wrapper>
-      <Links>
-        <Link href="https://twitter.com/" target="_blank">
-          user1
-        </Link>
-      </Links>
+      {ensName && (
+        <Links>
+          <Link
+            href={`https://zapper.xyz/account/${ensName.data}`}
+            target="_blank"
+          >
+            Zapper account @{ensName.data}
+          </Link>
+        </Links>
+      )}
 
       <Links>
         <Link href="https://github.com/s" target="_blank">
