@@ -9,9 +9,8 @@ contract UniswapSetupScript is Script, Deployers {
 
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address deployerAddress = vm.addr(deployerPrivateKey);
 
-        vm.startBroadcast(deployerPrivateKey);
+        vm.broadcast(deployerPrivateKey);
         Deployers.deployFreshManagerAndRouters();
         Deployers.deployMintAndApprove2Currencies();
     }

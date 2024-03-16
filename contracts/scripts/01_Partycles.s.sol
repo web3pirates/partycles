@@ -20,6 +20,8 @@ contract CounterScript is Script {
     function setUp() public {}
 
     function run() public {
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+
         // hook contracts must have specific flags encoded in the address
         uint160 flags = uint160(
             Hooks.BEFORE_SWAP_FLAG |
@@ -31,17 +33,15 @@ contract CounterScript is Script {
         (address hookAddress, bytes32 salt) = HookMiner.find(
             CREATE2_DEPLOYER,
             flags,
-            type(Counter).creationCode,
+            type(Partycle).creationCode,
             abi.encode(address(GOERLI_POOLMANAGER))
         );
 
         // Deploy the hook using CREATE2
-        vm.broadcast();
-        Counter counter = new Counter{salt: salt}(
-            IPoolManager(address(GOERLI_POOLMANAGER))
-        );
+        vm.broadcast(deployerPrivateKey);
+        Partycle partycle = new Partycle{salt: salt}("Partycles", "PARTY", 18);
         require(
-            address(counter) == hookAddress,
+            address(partycle) == hookAddress,
             "CounterScript: hook address mismatch"
         );
     }
