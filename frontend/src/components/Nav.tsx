@@ -1,10 +1,16 @@
 import nounceIcon from "../../public/images/nouseicon.jpeg";
 import styles from "../styles/styles.module.css";
+import { wagmiConfig } from "@/providers";
+import { useSharedState } from "@/utils/store";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMemo } from "react";
 import styled from "styled-components";
-import { useAccount, useEnsName } from "wagmi";
+import { getEnsName } from "viem/actions";
+import { mainnet } from "viem/chains";
+import { http, useAccount, useEnsAddress, useEnsName } from "wagmi";
 
 const Wrapper = styled.div`
   width: 100%;
