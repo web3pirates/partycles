@@ -10,6 +10,3 @@
 [submodule "contracts/lib/erc404"]
 	path = contracts/lib/erc404
 	url = https://github.com/Pandora-Labs-Org/erc404
-[submodule "contracts/lib/nouns-monorepo"]
-	path = contracts/lib/nouns-monorepo
-	url = https://github.com/nounsDAO/nouns-monorepo

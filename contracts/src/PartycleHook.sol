@@ -13,12 +13,14 @@ import {IERC20} from "../lib/v4-core/lib/openzeppelin-contracts/contracts/interf
 import {Currency, CurrencyLibrary} from "../lib/v4-core/src/types/Currency.sol";
 
 contract PartycleHook is BaseHook {
+    event Test(string);
+
     using PoolIdLibrary for PoolKey;
     using CurrencyLibrary for Currency;
 
     uint256 PARTYCLE_FEE = 500;
 
-    IPartycle partycle;
+    IPartycle public partycle;
 
     constructor(IPoolManager _poolManager) BaseHook(_poolManager) {}
 
@@ -32,15 +34,19 @@ contract PartycleHook is BaseHook {
             Hooks.Permissions({
                 beforeInitialize: false,
                 afterInitialize: false,
-                beforeAddLiquidity: true,
-                afterAddLiquidity: false,
+                beforeAddLiquidity: false,
+                afterAddLiquidity: true,
                 beforeRemoveLiquidity: false,
                 afterRemoveLiquidity: false,
-                beforeSwap: false,
+                beforeSwap: true,
                 afterSwap: true,
                 beforeDonate: false,
                 afterDonate: false
             });
+    }
+
+    function setPartycle(IPartycle _partycle) public {
+        partycle = _partycle;
     }
 
     // requires calldata to be an abi.encoded address of the user's wallet
@@ -117,8 +123,9 @@ contract PartycleHook is BaseHook {
             ? uint256(liquidityParams.liquidityDelta)
             : uint256(-liquidityParams.liquidityDelta);
         address swapper = abi.decode(data, (address));
+
         partycle.mintERC20(swapper, amount);
 
-        return BaseHook.beforeAddLiquidity.selector;
+        return BaseHook.afterAddLiquidity.selector;
     }
 }

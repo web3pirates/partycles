@@ -12,11 +12,12 @@ import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {CurrencyLibrary, Currency} from "v4-core/src/types/Currency.sol";
 import {PoolSwapTest} from "v4-core/src/test/PoolSwapTest.sol";
 import {Deployers} from "v4-core/test/utils/Deployers.sol";
+import {Constants} from "v4-core/test/utils/Constants.sol";
 import {PartycleHook} from "../src/PartycleHook.sol";
 import {HookMiner} from "./utils/HookMiner.sol";
 import {Partycle} from "../src/Partycle.sol";
-import {INounsDescriptorV2} from "lib/nouns-monorepo/packages/nouns-contracts/contracts/interfaces/INounsDescriptorV2.sol";
-import {INounsSeeder} from "lib/nouns-monorepo/packages/nouns-contracts/contracts/interfaces/INounsSeeder.sol";
+import {IPartycle} from "../src/interfaces/IPartycle.sol";
+import {IERC20} from "../lib/v4-core/lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol";
 
 contract CounterTest is Test, Deployers {
     using PoolIdLibrary for PoolKey;
@@ -24,21 +25,20 @@ contract CounterTest is Test, Deployers {
 
     PartycleHook hook;
     Partycle partycle;
-    INounsSeeder seeder;
-    INounsDescriptorV2 descriptor;
     PoolId poolId;
+    address alice = vm.addr(1);
 
     function setUp() public {
         // creates the pool manager, utility routers, and test tokens
         Deployers.deployFreshManagerAndRouters();
-        Deployers.deployMintAndApprove2Currencies();
+        (Currency currency0, Currency currency1) = Deployers
+            .deployMintAndApprove2Currencies();
 
         // Deploy the hook to an address with the correct flags
         uint160 flags = uint160(
             Hooks.BEFORE_SWAP_FLAG |
                 Hooks.AFTER_SWAP_FLAG |
-                Hooks.BEFORE_ADD_LIQUIDITY_FLAG |
-                Hooks.BEFORE_REMOVE_LIQUIDITY_FLAG
+                Hooks.AFTER_ADD_LIQUIDITY_FLAG
         );
         (address hookAddress, bytes32 salt) = HookMiner.find(
             address(this),
@@ -52,6 +52,19 @@ contract CounterTest is Test, Deployers {
             "CounterTest: hook address mismatch"
         );
 
+        partycle = new Partycle("Partycle", "PARTY", 18);
+        hook.setPartycle(IPartycle(address(partycle)));
+
+        // approve tokens to hook
+        IERC20 token0 = IERC20(address(uint160(currency0.toId())));
+        IERC20 token1 = IERC20(address(uint160(currency1.toId())));
+        token0.transfer(alice, 10e18);
+        token1.transfer(alice, 10e18);
+        vm.startPrank(alice);
+        token0.approve(address(hook), Constants.MAX_UINT256);
+        token1.approve(address(hook), Constants.MAX_UINT256);
+        vm.stopPrank();
+
         // Create the pool
         key = PoolKey(currency0, currency1, 3000, 60, IHooks(address(hook)));
         poolId = key.toId();
@@ -61,12 +74,12 @@ contract CounterTest is Test, Deployers {
         modifyLiquidityRouter.modifyLiquidity(
             key,
             IPoolManager.ModifyLiquidityParams(-60, 60, 10 ether),
-            ZERO_BYTES
+            abi.encode(alice)
         );
         modifyLiquidityRouter.modifyLiquidity(
             key,
             IPoolManager.ModifyLiquidityParams(-120, 120, 10 ether),
-            ZERO_BYTES
+            abi.encode(alice)
         );
         modifyLiquidityRouter.modifyLiquidity(
             key,
@@ -75,37 +88,24 @@ contract CounterTest is Test, Deployers {
                 TickMath.maxUsableTick(60),
                 10 ether
             ),
-            ZERO_BYTES
-        );
-
-        partycle = new Partycle(
-            "Partycle",
-            "PARTY",
-            18,
-            descriptor,
-            seeder,
-            address(hook)
+            abi.encode(alice)
         );
     }
 
     function testHooks() public {
-        // Perform a test swap //
         bool zeroForOne = true;
         int256 amountSpecified = -1e18; // negative number indicates exact input swap!
         BalanceDelta swapDelta = swap(
             key,
             zeroForOne,
             amountSpecified,
-            ZERO_BYTES
+            abi.encode(alice)
         );
-        // ------------------- //
 
         assertEq(int256(swapDelta.amount0()), amountSpecified);
     }
 
     function testLiquidityHooks() public {
-        // positions were created in setup()
-
         // remove liquidity
         int256 liquidityDelta = -1e18;
         modifyLiquidityRouter.modifyLiquidity(
