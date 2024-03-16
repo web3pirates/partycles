@@ -13,8 +13,6 @@ import {IERC20} from "../lib/v4-core/lib/openzeppelin-contracts/contracts/interf
 import {Currency, CurrencyLibrary} from "../lib/v4-core/src/types/Currency.sol";
 
 contract PartycleHook is BaseHook {
-    event Test(string);
-
     using PoolIdLibrary for PoolKey;
     using CurrencyLibrary for Currency;
 

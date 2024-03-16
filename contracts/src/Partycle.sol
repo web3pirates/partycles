@@ -24,9 +24,7 @@ contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     {}
 
     function mintERC20(address to, uint256 value) external {
-        emit Test("before mint");
         _mintERC20(to, value);
-        emit Test("after mintERC20");
     }
 
     function scratch(uint256 tokenId) public {
