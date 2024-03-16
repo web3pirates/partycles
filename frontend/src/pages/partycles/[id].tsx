@@ -1,11 +1,15 @@
 import { partyclesImages } from "../partycles";
 import { Nav } from "@/components/Nav";
 import { CustomContainer, Layout } from "@/components/atoms";
+import { usePartycle } from "@/hooks/usePartycle";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import { useAccount } from "wagmi";
 
 export default function PartycleView() {
   const router = useRouter();
+  const { scratch } = usePartycle();
+  const { address } = useAccount();
   const id = useMemo(
     () => Number(router.query.id as string),
     [router.query.id]
@@ -28,7 +32,12 @@ export default function PartycleView() {
               <img src={partyclesImages[id]} className="w-[400px] h-[400px]" />
             </div>
             <div className="col-span-7 flex justify-between">
-              <button className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2">
+              <button
+                onClick={() => {
+                  if (address) scratch(address, id);
+                }}
+                className="h-fit mt-auto text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-32 py-2.5 text-center me-2 mb-2"
+              >
                 Scratch
               </button>
               <button
