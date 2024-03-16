@@ -61,7 +61,7 @@ export function Nav() {
           type="button"
           className={styles.infoButton}
           onClick={() => {
-            router.push("/particles");
+            router.push("/partycles");
           }}
         >
           My particles
