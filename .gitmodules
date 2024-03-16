@@ -10,3 +10,6 @@
 [submodule "contracts/lib/erc404"]
 	path = contracts/lib/erc404
 	url = https://github.com/Pandora-Labs-Org/erc404
+[submodule "contracts/lib/chainlink"]
+	path = contracts/lib/chainlink
+	url = https://github.com/smartcontractkit/chainlink

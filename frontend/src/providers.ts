@@ -20,6 +20,6 @@ const connector = walletConnect({
 export const wagmiConfig = createConfig({
   chains: [mainnet, sepolia, arbitrum, base],
   client({ chain }) {
-    return createClient({ chain, transport: http("https://...") });
+    return createClient({ chain, transport: http() });
   },
 });

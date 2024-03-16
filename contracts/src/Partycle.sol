@@ -4,19 +4,23 @@ pragma solidity ^0.8.24;
 import {ERC404} from "lib/erc404/contracts/ERC404.sol";
 import {Ownable} from "lib/v4-periphery/lib/v4-core/lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import {DoubleEndedQueue} from "lib/erc404/contracts/lib/DoubleEndedQueue.sol";
+import {VRFConsumerBaseV2} from "lib/chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
+import {VRFCoordinatorV2Interface} from "lib/chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol";
 
-contract Partycle is ERC404, Ownable {
+contract Partycle is ERC404, Ownable, VRFConsumerBaseV2 {
     using DoubleEndedQueue for DoubleEndedQueue.Uint256Deque;
+
+    address VRFConsumerV2Address = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+    uint256 private randomNumber;
 
     constructor(
         string memory _name,
         string memory _symbol,
         uint8 _decimals
     )
-        // INounsDescriptorMinimal _descriptor,
-        // INounsSeeder _seeder
         ERC404(_name, _symbol, _decimals)
         Ownable()
+        VRFConsumerBaseV2(VRFConsumerV2Address)
     {}
 
     function mintERC20(address to, uint256 value) external {
@@ -26,6 +30,32 @@ contract Partycle is ERC404, Ownable {
     }
 
     function scratch(uint256 tokenId) public {
+        require(
+            _exists(tokenId),
+            "NounsToken: URI query for nonexistent token"
+        );
+        require(
+            msg.sender == _getOwnerOf(tokenId),
+            "Only owner can scratch token"
+        );
+
+        // see if a user have won with a possibility of 1 / 50 using random number as a seed
+        bool hasWon = uint256(
+            keccak256(
+                abi.encodePacked(
+                    block.timestamp,
+                    msg.sender,
+                    tokenId,
+                    randomNumber
+                )
+            )
+        ) %
+            50 ==
+            0;
+
+        if (hasWon) {
+            // send prize to the user
+        }
         erc721TransferFrom(msg.sender, address(0), tokenId);
     }
 
@@ -65,6 +95,25 @@ contract Partycle is ERC404, Ownable {
         // ERC-721 transfer exemptions handled above. Can't make it to this point if either is transfer exempt.
         _transferERC20(from_, to_, units);
         _transferERC721(from_, to_, id_);
+    }
+
+    function fulfillRandomWords(
+        uint256 requestId,
+        uint256[] memory randomWords
+    ) internal override {
+        randomNumber = randomWords[0];
+    }
+
+    function generateRandomNumber() public {
+        uint256 requestId = VRFCoordinatorV2Interface(
+            0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
+        ).requestRandomWords(
+                0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c,
+                10257,
+                200,
+                1000000,
+                1
+            );
     }
 
     function _exists(uint256 tokenId) internal view returns (bool) {
