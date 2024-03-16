@@ -1,5 +1,6 @@
 import ApolloClient from "@/utils/ApolloClient";
 import { gql } from "@apollo/client";
+import { zeroAddress } from "viem";
 
 export function useGraph() {
   async function fetchLeaderboard(): Promise<{ id: string; gained: number }[]> {
@@ -10,7 +11,7 @@ export function useGraph() {
       }>({
         query: gql`
           query {
-            users(first: 100, orderBy: "gained", orderDirection: "desc") {
+            users(first: 100, orderBy: "gained", orderDirection: "desc", where: {id_not: "${zeroAddress}"}) {
               id
               gained
             }
