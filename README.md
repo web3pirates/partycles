@@ -1,6 +1,6 @@
 # Partycles: Gamified Incentives for UniV4 Pools
 
-🎉 ###Finalists of ETHLondon 2024
+### Finalists of ETHLondon 2024 🎉
 
 Welcome to Partycles, where collecting partycles gets you invited to the reward party! Partycles is a platform designed to incentivize and gamify activity on UniV4 pools by rewarding users with NFT scratch cards containing ERC20 rewards.
 
